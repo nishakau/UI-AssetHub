@@ -63,7 +63,7 @@ export class Footer extends Component {
         <div className="flex">
         <hr/>
             <img src="../img/Oracle_Logo.png" style={{height:'25px'}} /> 
-            <div className="ml-5 text-center footerTitle">&copy;	Powered by &nbsp; &#10077; Oracle Cloud Solution Hubs &#10078;
+            <div className="ml-5 text-center footerTitle">&copy;	Powered by &nbsp; &#10077; NAT Solution Hubs &#10078;
             </div>
             <img id="Loader" class="hide" src="https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" height="30px"/>
             <div class="pull-right uniqueVisitors">Total  Visitors : <strong>{global.totalUniqueVisitors}</strong></div>

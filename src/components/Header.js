@@ -141,7 +141,7 @@ export class Header extends Component {
           <Navbar.Brand href="/">
             <img
               className="d-block clearfix logoImage"
-              src="../img/Logo.png"
+              src="../img/logoNat.png"
               alt="First slide"
               id="logoPanel"
             />
@@ -283,9 +283,9 @@ export class Header extends Component {
                         <img src="../img/Top_consuming_customers.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Top Booking Customers</span>
                       </div>
-                      <div className="bannerCard" onClick={() => this.linkOpen('https://oradocs-corp.sites.us2.oraclecloud.com/authsite/site-cloud-oc/cloud-success-stories.html')}>
+                      <div className="bannerCard">
                         <img src="../img/Win_Slides.png" alt="qrcoe" className="bannerstoryIconSmall" />
-                        <span style={{ color: "#000", lineHeight: "1.2" }}>NAC Consulting Wins & Go-Lives</span>
+                        <span style={{ color: "#000", lineHeight: "1.2" }}>NAT Consulting Wins & Go-Lives</span>
                       </div>
                       <div className="bannerCard" onClick={() => this.linkOpen(global.Ip + global.Port + '/guide/Customer_Ready.pdf')}>
                         <img src="../img/Win_Slides.png" alt="qrcoe" className="bannerstoryIconSmall" />
