@@ -10,8 +10,8 @@ class App extends Component {
     var baseDomain = protocol + ip;
 
     //PROD
-    // global.baseDom = baseDomain;
-    // global.Ip = baseDomain;//prod
+    global.baseDom = baseDomain;
+    global.Ip = baseDomain;//prod
     //  global.Port = ''; 
     //  global.baseDom="http://132.145.157.193";
     //  global.Ip = "http://132.145.157.193";
@@ -19,8 +19,8 @@ class App extends Component {
     // global.Port = ''; //dev
 
     //LOCAL
-    //   global.Ip = "http://132.145.157.193";
-    // global.Port = ':8001'; //prod
+    //    global.Ip = "http://132.145.157.193";
+    //  global.Port = ':8001'; //prod
     // global.Ip = "http://nac-assethub-dev.oracle.com";
     // global.baseDom = "http://nac-assethub-dev.oracle.com";
         // global.Ip = 'http://nac-assethub-staging.oracle.com';
