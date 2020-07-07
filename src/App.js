@@ -10,8 +10,8 @@ class App extends Component {
     var baseDomain = protocol + ip;
 
     //PROD
-    // global.baseDom = baseDomain;
-    // global.Ip = baseDomain;//prod
+    global.baseDom = baseDomain;
+    global.Ip = baseDomain;//prod
     //  global.Port = ''; 
     //  global.baseDom="http://132.145.157.193";
     //  global.Ip = "http://132.145.157.193";
