@@ -275,29 +275,29 @@ export class Header extends Component {
                   </div>
                   <div style={{ width: "85%", display: "flex", marginBottom: "25px", marginTop: "25px" }}>
                     <div style={{ display: "flex", marginBottom: "10px" }}>
-                      <div className="bannerCard" onClick={() => this.linkOpen(global.Ip + global.Port + '/guide/NAC_Consumption_Infographic.pdf')}>
+                      <div className="bannerCard">
                         <img src="../img/Top_consuming_customers.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Top Consuming Customers</span>
                       </div>
-                      <div className="bannerCard" onClick={() => this.linkOpen(global.Ip + global.Port + '/guide/NAC_Buyer_Infographic.pdf')}>
+                      <div className="bannerCard">
                         <img src="../img/Top_consuming_customers.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Top Booking Customers</span>
                       </div>
                       <div className="bannerCard">
                         <img src="../img/Win_Slides.png" alt="qrcoe" className="bannerstoryIconSmall" />
-                        <span style={{ color: "#000", lineHeight: "1.2" }}>NAT Consulting Wins & Go-Lives</span>
+                        <span style={{ color: "#000", lineHeight: "1.2" }}>NATech Consulting Wins & Go-Lives</span>
                       </div>
-                      <div className="bannerCard" onClick={() => this.linkOpen(global.Ip + global.Port + '/guide/Customer_Ready.pdf')}>
+                      <div className="bannerCard">
                         <img src="../img/Win_Slides.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Customer Ready Slides</span>
                       </div>
                       <br/>
 
-                      <div className="bannerCard" onClick={() => this.linkOpen(global.Ip + global.Port + '/guide/Reference_Information.pdf')}>
+                      <div className="bannerCard">
                         <img src="../img/ReferenceAssets.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Reference Assets</span>
                       </div>
-                      <div className="bannerCard" onClick={() => this.linkOpen(global.Ip + global.Port + '/guide/Resource_Information.pdf')}>
+                      <div className="bannerCard">
                         <img src="../img/ResourceAssets.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Resource Assets</span>
                       </div>
