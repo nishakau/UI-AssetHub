@@ -1188,8 +1188,8 @@ class ParentComponent extends Component {
                     </div>
                     <Container fluid={true}>
                         <Row>
-                           {/* <Col sm={3} className="pr-0">
-                                {/* <Filters onChange={this.ListOnChange.bind(this)}/> &ast/}
+                           <Col sm={3} className="pr-0">
+                                {/* <Filters onChange={this.ListOnChange.bind(this)}/> */}
                                 <div>
                                     <h5>Filter by <FilterManagement /><ClearFilter onClick={this.ListOnChange.bind(this)} /></h5>
 
@@ -1199,8 +1199,8 @@ class ParentComponent extends Component {
                                         </Form>
                                     </div>
                                 </div>
-                            </Col>*/}
-                            <Col sm={12}>
+                            </Col>
+                            <Col sm={9}>
                                 <div class="d-flex hide posAbs" id="sortBybtns">
                                     <a href="javascript:void(0);" onClick={e => this.deletePrefrences(e)}>Clear History</a>
                                     <Link to="/userPreference" >Update Preferences</Link>
