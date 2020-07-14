@@ -1083,7 +1083,8 @@ class AssetDetails extends Component {
             document.getElementById('createForm').classList.add('hide');
             axios.post(url, reqParms, {
                 headers: {
-                    "user_email": sessionStorage.getItem("user_email")
+                    "user_email": sessionStorage.getItem("user_email"),
+                    "type":"submit"
 
                 }
             })
