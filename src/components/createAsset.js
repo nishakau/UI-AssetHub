@@ -37,7 +37,6 @@ class AssetDetails extends Component {
             ScrmID: '',
             Customer: '',
             AssetExpiryDate: 6,
-            AssetOgroup:'',
             SolutionArea: '',
             Industry: '',
             Platform: '',
@@ -154,20 +153,7 @@ class AssetDetails extends Component {
                                     //    console.log(values.indexOf(selectedElement.options[selectSol].value) >= 0);
                                 }
                             }
-                            if (res.data.FILTERMAP[valuesol].TYPE == 'Asset Owner Group') {
-                                var selectedElement = document.getElementById('AssetOgroup');
-
-                                for (var p = 0; p <= res.data.FILTERMAP[valuesol].arr.length - 1; p++) {
-                                    arrOwn.push(res.data.FILTERMAP[valuesol].arr[p].FILTER_ID);
-                                }
-                                var values9 = arrOwn;
-                                for (var selectSol = 0; selectSol < selectedElement.options.length; selectSol++) {
-                                    //    console.log(selectedElement.options[selectSol].value);
-                                    //    alert('test');
-                                    selectedElement.options[selectSol].selected = values9.indexOf(selectedElement.options[selectSol].value) >= 0;
-                                    //    console.log(values.indexOf(selectedElement.options[selectSol].value) >= 0);
-                                }
-                            }
+                           
                             if (res.data.FILTERMAP[valuesol].TYPE == 'Industry') {
                                 var selectedElement = document.getElementById('Industry');
 
@@ -637,18 +623,11 @@ class AssetDetails extends Component {
         var dropDown = document.getElementById('SolutionArea'),
             SolutionAreaArray = [], p;
             SolutionAreaArray.push({ Value: this.state.AssetFormSelection });
-        var AssetOgroup=document.getElementById('AssetOgroup'), a;
         var dropDownIndustry = document.getElementById('Industry'), q;
         var dropDownPlatform = document.getElementById('Platform'), r;
         // var dropDownAssetType = document.getElementById('AssetType'), t;
         var dropDownSalesPlay = document.getElementById('SalesPlay'), k;
-        for (a = 0; a < AssetOgroup.options.length; a += 1) {
-            if (AssetOgroup.options[a].selected) {
-                //countryArray.push( dropDown.options[i].value); //If you need only values 
-                SolutionAreaArray.push({ Value: AssetOgroup.options[a].value });
-            }
-
-        }
+        
         for (p = 0; p < dropDown.options.length; p += 1) {
             if (dropDown.options[p].selected) {
                 //countryArray.push( dropDown.options[i].value); //If you need only values 
@@ -974,13 +953,7 @@ class AssetDetails extends Component {
 
         }
         if (document.getElementById('AssetId').value == "") {
-            // alert(this.state.AssetOgroup);
-            if (this.state.AssetOgroup == "") {
-                alert('Please enter Asset Owner Group');
-                document.getElementById('AssetOgroup').focus();
-                return false;
-                e.preventDefault();
-            }
+            
             if (this.state.SolutionArea == "") {
                 alert('Please enter Asset Solution Area');
                 document.getElementById('SolutionArea').focus();
@@ -1313,15 +1286,8 @@ class AssetDetails extends Component {
                                         </Form.Group>
                                     </Row>
                                    <Row>
-                                   <Form.Group as={Col} md={6} >
-                                            <Form.Label>Asset Owner Group <sup>*</sup><span title="Select all solution areas this asset involves ">&#x1f6c8;</span></Form.Label>
-                                         
-                                            <Form.Control as="select" multiple id="AssetOgroup" name='AssetOgroup' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.OwnerGroupFilterDrop }}>
-
-                                            </Form.Control>
-                                        </Form.Group>
                                       
-                                        <Form.Group as={Col} md={6} >
+                                        <Form.Group as={Col} md={12} >
                                             <Form.Label>Solution Area <sup>*</sup><span title="Select all solution areas this asset involves ">&#x1f6c8;</span></Form.Label>
                                          
                                             <Form.Control as="select" multiple id="SolutionArea" name='SolutionArea' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.solutionFilterdrop }}>
