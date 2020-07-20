@@ -181,7 +181,7 @@ export class ImageCard extends Component {
             return <Redirect push to={"/WSdetails/?" + this.state.winID} />;
 
         }
-        var AssetDatanew; var onlyWorkshopData; var onlyWhitePaper;
+        var AssetDatanew= new Array(); var onlyWorkshopData = new Array(); var onlyWhitePaper= new Array();
         var WinDatanew;
         var onlyWinData; var onlyConsultingWin;
         //   console.log(global.assetData);
@@ -195,24 +195,30 @@ export class ImageCard extends Component {
         if (global.assetData != undefined) {
             // AssetDatanew = global.assetData;
             AssetDatanew = global.assetData.filter(function (el) {
+                if(el.GROUP_TYPE.length <1) return;
                 return el.GROUP_TYPE[0].FILTER_ID === "170k5dr4xvz";
             });
             onlyWorkshopData = global.assetData.filter(function (el) {
+                if(el.GROUP_TYPE.length <1) return;
                 return el.GROUP_TYPE[0].FILTER_ID === "dq7k9lprfox";
             });
             onlyWhitePaper = global.assetData.filter(function (el) {
+                if(el.GROUP_TYPE.length <1) return;
                 return el.GROUP_TYPE[0].FILTER_ID === "dq7k9sdgroc"
             });
             // console.log(global.assetData.length + ' AssetDatanew' + AssetDatanew.length + 'onlyWorkshopData' + onlyWorkshopData.length)
         } else {
             //AssetDatanew = this.state.AssetData;
             AssetDatanew = this.state.AssetData.filter(function (el) {
+                if(el.GROUP_TYPE.length <1) return;
                 return el.GROUP_TYPE[0].FILTER_ID === "170k5dr4xvz";
             });
             onlyWorkshopData = this.state.AssetData.filter(function (el) {
+                if(el.GROUP_TYPE.length <1) return;
                 return el.GROUP_TYPE[0].FILTER_ID === "dq7k9lprfox";
             });
             onlyWhitePaper = this.state.AssetData.filter(function (el) {
+                if(el.GROUP_TYPE.length <1) return;
                 return el.GROUP_TYPE[0].FILTER_ID === "dq7k9sdgroc"
             });
             // console.log(this.state.AssetData.length + ' this.state.AssetData' + AssetDatanew.length + 'onlyWorkshopData' + onlyWorkshopData.length)
