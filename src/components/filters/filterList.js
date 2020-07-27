@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import axios from 'axios';
 import './index.css';
+import TreeMenu from './treeFilter';
 export class FiltersList extends Component {
     constructor(props, context) {
         super(props, context);
@@ -65,7 +66,8 @@ export class FiltersList extends Component {
         var ListOnChange = this.props.onChange;
         const { open } = this.state;
         function filterBox(event) {
-            var j = "";
+          /*var j = "";
+            console.log("called from child into parent");
             //alert(global.selectedcheckbox);
             if (global.selectedcheckbox != undefined) {
                 // alert('1111');
@@ -117,7 +119,7 @@ export class FiltersList extends Component {
             //     global.selectedCategory="ASSET";
             //     document.getElementById("CategoryBox").value = "ASSET";
             //     // document.getElementById('WinStory').style.display='block';
-            // }
+            // }*/
             ListOnChange(global.selectedcheckbox);
         }
         //   function  UncheckAllFilters(event){
@@ -135,37 +137,24 @@ export class FiltersList extends Component {
                 
                 {this.state.FilterData.map((FilterData, index) =>
                 <>
-                    {/* {FilterData.filters[0].FILTER_STATUS!="-1" && <> */}
-
-                    <div className={this.state.class}>
-
-                        <h6 onClick={this.handleClick.bind(this, FilterData.Type)}>{FilterData.Type}<span className="expand" id={FilterData.Type + 'expand'}>-</span></h6>
-                        <ListGroup id={FilterData.Type} className="show">
-                            {FilterData.filters.map((Filters, index) =>
-                                <ListGroup.Item >
-                                    {/* {Filters.FILTER_STATUS!="-1" && <> */}
-                                    {['checkbox'].map(type => (
-                                        <div key={Filters.FILTER_ID}>
-                                            <Form.Check onClick={filterBox}
-                                                custom
-                                                type={type}
-                                                id={Filters.FILTER_ID}
-                                                label={Filters.FILTER_NAME}
-                                                name="filterData"
-                                            />
-                                        </div>
-                                    ))}
-                             {/* </>} */}
-                                </ListGroup.Item>)}
-                            <input type="hidden" id={FilterData.Type + 'val'} value="false" />
-                        </ListGroup>
-                                   
-                    </div>
-                      {/* </>}  */}
-                      
-                        </>
+                <div className={this.state.class}>
+                <h6 onClick={this.handleClick.bind(this, FilterData.Type)}>{FilterData.Type}<span className="expand" id={FilterData.Type + 'expand'}>-</span></h6>
+                <div id={FilterData.Type} className="hide show">
+                <ul style={{listStyleType:'none',paddingLeft: '0px'}}>
+                {FilterData.filters.map((Filters, index) =>
+                    
+                    <li>
+                        <TreeMenu selectedcheckbox={global.selectedcheckbox} Filters={Filters} ListOnChange={filterBox}></TreeMenu>
+                    </li>
+                    
                 )}
-            </div>
+                </ul>
+                <input type="hidden" id={FilterData.Type + 'val'} value="false" />
+                </div>
+                </div>
+                </>
+                )}
+                        </div>
         )
     }
 }
