@@ -48,38 +48,38 @@ class TreeMenu extends React.Component {
 
   render() {
     if (
-      this.props.Filters.secondary != undefined &&
-      this.props.Filters.secondary.length > 1
+      this.props.Filters.SECONDARY != undefined &&
+      this.props.Filters.SECONDARY.length > 0
     ) {
       return (
         <div>
-          <span onClick={this.handleClick.bind(this, this.props.Filters.name)}>
+          <span onClick={this.handleClick.bind(this, this.props.Filters.FILTER_NAME)}>
             <span
               className="expand_left"
-              id={this.props.Filters.name + "expand"}
+              id={this.props.Filters.FILTER_NAME + "expand"}
             >
               -
             </span>
-            {this.props.Filters.name}
+            {this.props.Filters.FILTER_NAME}
           </span>
 
-          <div className="hide show" id={this.props.Filters.name}>
+          <div className="hide show" id={this.props.Filters.FILTER_NAME}>
             <ul>
-              {this.props.Filters.secondary.map((second) => (
-                <li key={second.id}>
+              {this.props.Filters.SECONDARY.map((second) => (
+                <li key={second.FILTER_ID_SECONDARY}>
                   <input
                     type="checkbox"
                     onClick={this.filterBox}
-                    id={second.id}
+                    id={second.FILTER_ID_SECONDARY}
                     name="filterData"
                   ></input>
-                  <span style={{ "margin-left": "5px" }}>{second.name}</span>
+                  <span style={{ "margin-left": "5px" }}>{second.FILTER_NAME}</span>
                 </li>
               ))}
             </ul>
             <input
               type="hidden"
-              id={this.props.Filters.name + "val"}
+              id={this.props.Filters.FILTER_NAME + "val"}
               value="false"
             />
           </div>
