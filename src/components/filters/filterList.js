@@ -143,7 +143,7 @@ export class FiltersList extends Component {
                 <ul style={{listStyleType:'none',paddingLeft: '0px'}}>
                 {FilterData.filters.map((Filters, index) =>
                     
-                    <li>
+                    <li class="mt-5px">
                         <TreeMenu selectedcheckbox={global.selectedcheckbox} Filters={Filters} ListOnChange={filterBox}></TreeMenu>
                     </li>
                     

@@ -1010,3 +1010,11 @@ div.tooltipDiv:hover  + div.kckgBd
   .active {
     display: block;
   }
+
+  .mt-5px{
+    margin-top:5px;
+  }
+
+  .ml-2px{
+    margin-left: 2px;
+  }

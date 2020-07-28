@@ -84,7 +84,40 @@ export class FiltersList extends Component {
         }else{
          var FilterDataListnew=this.state.FilterData;
         }
-   
+        console.log(FilterDataListnew);
+
+    function filterContentMapFilter(fdata){
+        if(fdata.SECONDARY.length >0){
+            return (
+                <div>
+                    
+                   <span> - {fdata.FILTER_NAME + ' ('+(fdata.ASSET_COUNT + fdata.WINSTORY_COUNT)+')'}</span>
+                        <ul>
+                            {fdata.SECONDARY.map((secondary)=>(
+                                <li key={secondary.FILTER_ID_SECONDARY}>
+		                            <input  type="checkbox" id={secondary.FILTER_ID_SECONDARY} name="filterData" onClick={filterBox}/>
+						            <span className="ml-2px">
+                                    {secondary.FILTER_NAME }
+						            </span> 
+                                </li>
+                            ))}
+                        </ul>
+                    
+                        </div>
+                
+
+            );
+
+        }else{
+            return (
+                <>
+		
+				        <input  type="checkbox" id={fdata.FILTER_ID} name="filterData" onClick={filterBox}/>
+                        <span className="ml-2px"> {fdata.FILTER_NAME + ' ('+(fdata.ASSET_COUNT + fdata.WINSTORY_COUNT)+')'} </span> 
+                </>
+            );
+        }
+    }
     return (
             <div class="collaps">
 
@@ -93,24 +126,20 @@ export class FiltersList extends Component {
                  {/* {FilterData.Type !="Assets Type" && <> */}
                     <div className={this.state.class}>
                         <h6 onClick={this.handleClick.bind(this,FilterData.Type)}>{FilterData.Type}<span className="expand" id={FilterData.Type+'expand'}>-</span></h6>
-                        <ListGroup  id={FilterData.Type} className="show">
+                        <div  id={FilterData.Type} className="hide show">
+                            
                         {FilterData.filters.map((Filters,index) => 
-                            <ListGroup.Item >
-                                {['checkbox'].map(type => (
-                                <div key={Filters.FILTER_ID}>
-                                <span onClick={filterBox}  type={type}
-                                    id={Filters.FILTER_ID}
-                                    label={Filters.FILTER_NAME + ' ('+(Filters.ASSET_COUNT + Filters.WINSTORY_COUNT)+')'}
-                                    name="filterData"><input  type={type}
-                                    id={Filters.FILTER_ID}
-                                    label={Filters.FILTER_NAME + ' ('+(Filters.ASSET_COUNT + Filters.WINSTORY_COUNT)+')'}
-                                    name="filterData"/>{Filters.FILTER_NAME + ' ('+(Filters.ASSET_COUNT + Filters.WINSTORY_COUNT)+')'}</span>
-                              
-                                    </div>
-                                ))}
-                            </ListGroup.Item>)}
+                            
+                               
+                            <div key={Filters.FILTER_ID}>
+
+                                {filterContentMapFilter(Filters)}
+                               
+                            </div>
+                               
+                            )}
                             <input type="hidden" id={FilterData.Type+'val'} value="false"/>
-                        </ListGroup>
+                        </div>
 
                 </div>
                 {/* </>
