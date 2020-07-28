@@ -93,10 +93,10 @@ export class FiltersList extends Component {
                    <span> - {fdata.FILTER_NAME + ' ('+(fdata.ASSET_COUNT + fdata.WINSTORY_COUNT)+')'}</span>
                         <ul>
                             {fdata.SECONDARY.map((secondary)=>(
-                                <li key={secondary.FILTER_ID_SECONDARY}>
-		                            <input  type="checkbox" id={secondary.FILTER_ID_SECONDARY} name="filterData" onClick={filterBox}/>
+                                <li key={secondary.FILTER_ID}>
+		                            <input  type="checkbox" id={secondary.FILTER_ID} name="filterData" onClick={filterBox}/>
 						           
-						            <span className="ml-2px"> {secondary.FILTER_NAME }</span> 
+						            <span className="ml-2px"> {secondary.SEC_FILTER_NAME }</span> 
                                 </li>
                             ))}
                         </ul>

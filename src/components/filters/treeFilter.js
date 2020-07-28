@@ -66,14 +66,14 @@ class TreeMenu extends React.Component {
           <div className="hide show" id={this.props.Filters.FILTER_NAME}>
             <ul>
               {this.props.Filters.SECONDARY.map((second) => (
-                <li key={second.FILTER_ID_SECONDARY}>
+                <li key={second.FILTER_ID}>
                   <input
                     type="checkbox"
                     onClick={this.filterBox}
-                    id={second.FILTER_ID_SECONDARY}
+                    id={second.FILTER_ID}
                     name="filterData"
                   ></input>
-                  <span style={{ "margin-left": "5px" }}>{second.FILTER_NAME}</span>
+                  <span style={{ "margin-left": "5px" }}>{second.SEC_FILTER_NAME}</span>
                 </li>
               ))}
             </ul>
