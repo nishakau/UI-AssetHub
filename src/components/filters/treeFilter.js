@@ -53,17 +53,17 @@ class TreeMenu extends React.Component {
     ) {
       return (
         <div>
-          <span onClick={this.handleClick.bind(this, this.props.Filters.FILTER_NAME)}>
+          <span onClick={this.handleClick.bind(this, this.props.Filters.FILTER_ID)}>
             <span
               className="expand_left"
-              id={this.props.Filters.FILTER_NAME + "expand"}
+              id={this.props.Filters.FILTER_ID + "expand"}
             >
               +
             </span>
             {this.props.Filters.FILTER_NAME}
           </span>
 
-          <div className="hide" id={this.props.Filters.FILTER_NAME}>
+          <div className="hide" id={this.props.Filters.FILTER_ID}>
             <ul>
               {this.props.Filters.SECONDARY.map((second) => (
                 <li key={second.FILTER_ID}>
@@ -79,7 +79,7 @@ class TreeMenu extends React.Component {
             </ul>
             <input
               type="hidden"
-              id={this.props.Filters.FILTER_NAME + "val"}
+              id={this.props.Filters.FILTER_ID + "val"}
               value="true"
             />
           </div>

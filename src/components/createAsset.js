@@ -338,6 +338,12 @@ class AssetDetails extends Component {
                 if (FilterData[i].Type == "Solution Area") {
                     var SolutionAreaDrop = "";
                     for (var Solfilter = 0; Solfilter < FilterData[i].filters.length; Solfilter++) {
+                        if(FilterData[i].filters[Solfilter].SECONDARY.length >0){
+                            for(let secondary=0;secondary<FilterData[i].filters[Solfilter].SECONDARY.length;secondary++){
+                                SolutionAreaDrop += "<option value='" + FilterData[i].filters[Solfilter].SECONDARY[secondary].FILTER_ID + "'>" + FilterData[i].filters[Solfilter].FILTER_NAME +" - "+FilterData[i].filters[Solfilter].SECONDARY[secondary].SEC_FILTER_NAME +'</option>';
+                            }
+                            continue;
+                        }
                         SolutionAreaDrop += "<option value='" + FilterData[i].filters[Solfilter].FILTER_ID + "'>" + FilterData[i].filters[Solfilter].FILTER_NAME + '</option>';
                     }
                     this.setState({
@@ -356,6 +362,14 @@ class AssetDetails extends Component {
                 else if (FilterData[i].Type == "Industry") {
                     var IndustryAreaDrop = "";
                     for (var Industryfilter = 0; Industryfilter < FilterData[i].filters.length; Industryfilter++) {
+
+                        if(FilterData[i].filters[Industryfilter].SECONDARY.length >0){
+                            for(let secondary=0;secondary<FilterData[i].filters[Industryfilter].SECONDARY.length;secondary++){
+                                IndustryAreaDrop += "<option value='" + FilterData[i].filters[Industryfilter].SECONDARY[secondary].FILTER_ID + "'>" + FilterData[i].filters[Industryfilter].FILTER_NAME +" - "+FilterData[i].filters[Industryfilter].SECONDARY[secondary].SEC_FILTER_NAME +'</option>';
+                            }
+                            continue;
+                        }
+
                         IndustryAreaDrop += "<option value='" + FilterData[i].filters[Industryfilter].FILTER_ID + "'>" + FilterData[i].filters[Industryfilter].FILTER_NAME + '</option>';
                     }
                     this.setState({
