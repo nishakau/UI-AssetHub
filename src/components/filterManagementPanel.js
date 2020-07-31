@@ -2757,7 +2757,7 @@ export class FilterManagemnt extends Component {
 
                         <div className="text-center col-md-12 Heading">{this.state.msg}</div>
 
-                        <Row>
+                        <Row className="col-md-4">
                             <Col md={12}>
                                 <div className="title flex">
                                     <div class="nowrap">FILTER MANAGEMENT</div>
@@ -3151,31 +3151,36 @@ export class FilterManagemnt extends Component {
 
                                     </Tab>
                                     <Tab eventKey="Map" title="Map Filter">
+                                    <div className="row">
+                                        <div class="collaps  pull-left col-md-3">
 
-                                        <div class="collaps  pull-left">
 
+                                                <div className="filters" id="SortFilterMapSection">
+                                                    <Form>
+                                                        <Mappedfilters onChange={this.mappingOnChange.bind(this)} />
 
-                                            <div className="filters" id="SortFilterMapSection">
-                                                <Form>
-                                                    <Mappedfilters onChange={this.mappingOnChange.bind(this)} />
+                                                    </Form>
+                                                </div>
 
-                                                </Form>
+                                        </div>
+                                        <div className="col-md-9">
+                                            <div class="mapSearch">
+                                                <Search onChange={this.searchOnChange.bind(this)} />
                                             </div>
 
+                                            <ImageCard onChange={this.mappingImageOnChange.bind(this)} />
+
+
+
+                                            <div class="clearfix text-center mb-20 stickyButtonFooter">
+                                                <p>This action will Map selected Assets/Wins to selected filters</p>
+                                                <button type="button" class="btn btn-primary" onClick={(e) => this.ApplyFilters(e)} >Apply Mapping</button>
+                                            </div>
                                         </div>
+                                    </div>
+                                        
 
-                                        <div class="mapSearch">
-                                            <Search onChange={this.searchOnChange.bind(this)} />
-                                        </div>
-
-                                        <ImageCard onChange={this.mappingImageOnChange.bind(this)} />
-
-
-
-                                        <div class="clearfix text-center mb-20 stickyButtonFooter">
-                                            <p>This action will Map selected Assets/Wins to selected filters</p>
-                                            <button type="button" class="btn btn-primary" onClick={(e) => this.ApplyFilters(e)} >Apply Mapping</button>
-                                        </div>
+                                       
 
 
 
@@ -3186,8 +3191,8 @@ export class FilterManagemnt extends Component {
                                         {/* test5 */}
 
                                         {/* <Search onChange={this.searchOnChange.bind(this)}/> */}
-
-                                        <div class="collaps  pull-left">
+                                        <div className="row">
+                                            <div className="collaps  pull-left col-md-3">
 
                                             {/* <ClearFilter  onClick={this.ListOnUnMapChange.bind(this)}/> */}
 
@@ -3201,8 +3206,9 @@ export class FilterManagemnt extends Component {
                                             </div>
                                             {/* <button type="button" class="btn btn-block btn-primary" onClick={(e) => this.UnMapApplyFilters(e)} >UnMap Filter</button> */}
 
-                                        </div>
-                                        {global.selectedcheckboxUnMap != undefined && <>
+                                            </div>
+                                            <div className="col-md-9">
+                                            {global.selectedcheckboxUnMap != undefined && <>
                                             {/* <UNSelectALL /> */}
                                             <UnMapCards onChange={this.UnmappingImageOnChange.bind(this)} />
 
@@ -3211,6 +3217,10 @@ export class FilterManagemnt extends Component {
                                                 <button type="button" class="btn btn-primary" onClick={(e) => this.UnMapApplyFilters(e)} >Confirm</button>
                                             </div>
                                         </>}
+                                            </div>
+                                        </div>
+                                        
+                                        
                                     </Tab>
 
 
