@@ -2583,7 +2583,7 @@ export class FilterManagemnt extends Component {
     }
     render() {
         //    alert(global.dataName);
-        function selectBox(id) {
+        function selectBox(id,type=null) {
             //  alert(id);
 
             // var d = document.getElementById("CategoryBox").value;
@@ -2600,10 +2600,11 @@ export class FilterManagemnt extends Component {
                             document.getElementById(id).value = "";
                             return false;
                         }
-                    } else {
+                    } else if(type!= null){
+                        
                         if ((FilterData[k].filters).length > 0) {
                             //  alert("test");
-
+                            if(FilterData[k].Type != type) continue;
                             for (var j = 0; j < (FilterData[k].filters).length; j++) {
                                 console.log("filterL2" + FilterData[k].filters[j].FILTER_NAME);
                                 if ((FilterData[k].filters[j].FILTER_NAME).toLowerCase() == strUser.toLowerCase()) {
@@ -2860,7 +2861,7 @@ export class FilterManagemnt extends Component {
                                                                             <input type="text" class="form-control" id={"EnterChildFilter" + FilterData.Type + "Data"} placeholder="Add Filter" onBlur={(ev) => {
                                                                                 // console.log(`Pressed keyCode ${ev.key}`);
                                                                                 //  if (ev.key === 'Enter') {
-                                                                                selectBox("EnterChildFilter" + FilterData.Type + "Data");
+                                                                                selectBox("EnterChildFilter" + FilterData.Type + "Data",FilterData.Type);
                                                                                 ev.preventDefault();
                                                                                 // }
                                                                             }} />
