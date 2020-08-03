@@ -91,13 +91,13 @@ export class FiltersList extends Component {
             return (
                 <div>
                     
-                   <span> - {fdata.FILTER_NAME + ' ('+(fdata.ASSET_COUNT + fdata.WINSTORY_COUNT)+')'}</span>
+                   <span> - {fdata.FILTER_NAME}</span>
                         <ul>
                             {fdata.SECONDARY.map((secondary)=>(
                                 <li key={secondary.FILTER_ID}>
 		                            <input  type="checkbox" id={secondary.FILTER_ID} name="filterData" onClick={filterBox}/>
 						            <span className="ml-2px">
-                                    {secondary.SEC_FILTER_NAME }
+                                    {secondary.SEC_FILTER_NAME + ' ('+(secondary.ASSET_COUNT + secondary.WINSTORY_COUNT)+')'}
 						            </span> 
                                 </li>
                             ))}
