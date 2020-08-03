@@ -176,7 +176,7 @@ export class Header extends Component {
                   alt="Banner Image" />
                 <Carousel.Caption className="text-left d-none d-sm-block">
 
-                  <div style={{ width: "100%", display: "flex" }}>
+                  {/*<div style={{ width: "100%", display: "flex" }}>
                     <div style={{ width: "70%", display: "block", marginTop: "15px" }}>
                       <div>
                         <label style={{ fontFamily: "Georgia Bold !important", fontSize: "30px" }}>To Install the Mobile App from EMM</label>
@@ -241,13 +241,13 @@ export class Header extends Component {
                             <div style={{ margin: "10px" }}>
                               <span style={{ fontSize: "15px" }}>Everything in one place</span>
                           </div>
-                          </div> */}
+                          </div> astrk/}
                           
                            {/* <div>
                             <p>
                               Explore all the Assets/Wins and its collaterals in one place
                           </p>
-                          </div>  */}
+                          </div>  astrk/}
                         </div>
                         {/* <div style={{ marginLeft: "10px", width: "30%", display: "block", textAlign: 'center' }}>
                           <div>
@@ -257,7 +257,7 @@ export class Header extends Component {
                             <span style={{ fontSize: "15px" }}>Request for a demo</span>
                           </div>
                          
-                        </div> */}
+                        </div> astrk/}
                         {/* <div style={{ marginLeft: "10px", width: "30%", display: "block", textAlign: 'center' }}>
                           <div>
                             <img src="../img/homeicon3.png" alt="qrcoe" className="bannerstoryIcon" />
@@ -266,13 +266,13 @@ export class Header extends Component {
                             <span style={{ fontSize: "15px" }}>Personalised Home</span>
                           </div>
                          
-                        </div> */}
-                      {/* </div> */}
+                        </div> astrk/}
+                      {/* </div> astrk/}
                       <div>
 
                       </div>
                     </div>
-                  </div>
+                  </div>*/}
                   <div style={{ width: "85%", display: "flex", marginBottom: "25px", marginTop: "25px" }}>
                     <div style={{ display: "flex", marginBottom: "10px" }}>
                       <div className="bannerCard">
