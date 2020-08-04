@@ -1018,3 +1018,7 @@ div.tooltipDiv:hover  + div.kckgBd
   .ml-2px{
     margin-left: 2px;
   }
+
+  .displayNone{
+    display: none;
+  }
