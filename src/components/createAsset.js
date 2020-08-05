@@ -1363,14 +1363,14 @@ class AssetDetails extends Component {
                                     {(this.state.AssetFormSelection == '170k5dr4xvz') &&
                                         <Row>
                                             <Form.Group as={Col} md={6} >
-                                                <Form.Label>Customer <span title="Please ensure this is the Oracle standard name, not an abbreviation
+                                                <Form.Label>Customer Name <span title="Please ensure this is the Oracle standard name, not an abbreviation
                         Examples: Development Center, not DC">&#x1f6c8;</span></Form.Label>
                                                 <Form.Control type="text" id="Customer" name='Customer' maxLength="255"
                                                     value={this.state.Customer}
                                                     onChange={e => this.handleChange(e)} placeholder="Enter Customer" />
                                             </Form.Group>
                                             <Form.Group as={Col} md={6} >
-                                                <Form.Label>Service Request Id </Form.Label>
+                                                <Form.Label>Service Request ID </Form.Label>
                                                 <Form.Control type="text" id="ScrmID" name='ScrmID' maxLength="20"
                                                     value={this.state.ScrmID}
                                                     onChange={e => this.handleChange(e)} placeholder="Enter Service Request ID" />
@@ -1399,7 +1399,7 @@ class AssetDetails extends Component {
                                             <Form.Label>Upload  Video Link <span title="Attach the default business video link of the asset from OTube/Youtube.">&#x1f6c8;</span></Form.Label>
                                             <Form.Control type="text" id="video_link" name='video_link' maxLength="255"
                                                 value={this.state.video_link}
-                                                onChange={e => this.handleChange(e)} placeholder="Enter Otube/Youtube Embed Link" />
+                                                onChange={e => this.handleChange(e)} placeholder="Enter Otube / Youtube Embed link" />
 
                                             {/* <Form.Control as="file">
                        
