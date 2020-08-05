@@ -65,7 +65,7 @@ export class TabsPanel extends Component {
         promoteStatus: "",
         opportunity: "",
         assettype: '',
-        requestTitle: ''
+        requestTitle: 'Request for Demo'
 
     }
 
