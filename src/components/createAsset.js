@@ -39,11 +39,11 @@ class AssetDetails extends Component {
             AssetExpiryDate: 6,
             SolutionArea: '',
             Industry: '',
-            Platform: '',
+           // Platform: '',
             Asset_Description: '',
             Use_Case: '',
             AssetType: '',
-            SalesPlay: '',
+            //SalesPlay: '',
             Asset_Accessablity: '',
             OwnerGroupFilterDrop:"",
             // Notional_Architechure_Notes: '',
@@ -166,7 +166,7 @@ class AssetDetails extends Component {
                                 }
 
                             }
-                            if (res.data.FILTERMAP[valuesol].TYPE == 'Buyer Profile') {
+                           /* if (res.data.FILTERMAP[valuesol].TYPE == 'Buyer Profile') {
                                 var selectedElement = document.getElementById('Platform');
 
                                 // alert('1'+res.data.FILTERMAP[valuesol]);
@@ -178,9 +178,9 @@ class AssetDetails extends Component {
                                     selectedElement.options[selectSol].selected = values2.indexOf(selectedElement.options[selectSol].value) >= 0;
                                 }
 
-                            }
+                            }*/
 
-                            if (res.data.FILTERMAP[valuesol].TYPE == 'Sales Initiatives') {
+                           /* if (res.data.FILTERMAP[valuesol].TYPE == 'Sales Initiatives') {
                                 var selectedElement = document.getElementById('SalesPlay');
 
                                 // alert('1'+res.data.FILTERMAP[valuesol]);
@@ -192,7 +192,7 @@ class AssetDetails extends Component {
                                     selectedElement.options[selectSol].selected = values4.indexOf(selectedElement.options[selectSol].value) >= 0;
                                 }
 
-                            }
+                            }*/
 
 
                         }
@@ -338,6 +338,12 @@ class AssetDetails extends Component {
                 if (FilterData[i].Type == "Solution Area") {
                     var SolutionAreaDrop = "";
                     for (var Solfilter = 0; Solfilter < FilterData[i].filters.length; Solfilter++) {
+                        if(FilterData[i].filters[Solfilter].SECONDARY.length >0){
+                            for(let secondary=0;secondary<FilterData[i].filters[Solfilter].SECONDARY.length;secondary++){
+                                SolutionAreaDrop += "<option value='" + FilterData[i].filters[Solfilter].SECONDARY[secondary].FILTER_ID + "'>" + FilterData[i].filters[Solfilter].FILTER_NAME +" - "+FilterData[i].filters[Solfilter].SECONDARY[secondary].SEC_FILTER_NAME +'</option>';
+                            }
+                            continue;
+                        }
                         SolutionAreaDrop += "<option value='" + FilterData[i].filters[Solfilter].FILTER_ID + "'>" + FilterData[i].filters[Solfilter].FILTER_NAME + '</option>';
                     }
                     this.setState({
@@ -356,12 +362,20 @@ class AssetDetails extends Component {
                 else if (FilterData[i].Type == "Industry") {
                     var IndustryAreaDrop = "";
                     for (var Industryfilter = 0; Industryfilter < FilterData[i].filters.length; Industryfilter++) {
+
+                        if(FilterData[i].filters[Industryfilter].SECONDARY.length >0){
+                            for(let secondary=0;secondary<FilterData[i].filters[Industryfilter].SECONDARY.length;secondary++){
+                                IndustryAreaDrop += "<option value='" + FilterData[i].filters[Industryfilter].SECONDARY[secondary].FILTER_ID + "'>" + FilterData[i].filters[Industryfilter].FILTER_NAME +" - "+FilterData[i].filters[Industryfilter].SECONDARY[secondary].SEC_FILTER_NAME +'</option>';
+                            }
+                            continue;
+                        }
+
                         IndustryAreaDrop += "<option value='" + FilterData[i].filters[Industryfilter].FILTER_ID + "'>" + FilterData[i].filters[Industryfilter].FILTER_NAME + '</option>';
                     }
                     this.setState({
                         IndustryFilterdrop: IndustryAreaDrop
                     })
-                } else if (FilterData[i].Type == "Buyer Profile") {
+                } /*else if (FilterData[i].Type == "Buyer Profile") {
                     var PlatformAreaDrop = " ";
                     for (var Platformfilter = 0; Platformfilter < FilterData[i].filters.length; Platformfilter++) {
                         PlatformAreaDrop += "<option value='" + FilterData[i].filters[Platformfilter].FILTER_ID + "'>" + FilterData[i].filters[Platformfilter].FILTER_NAME + '</option>';
@@ -369,7 +383,7 @@ class AssetDetails extends Component {
                     this.setState({
                         PlatformFilterdrop: PlatformAreaDrop
                     })
-                }
+                }*/
                 // else if (FilterData[i].Type == "Asset Type") {
                 //     var AssetTypeAreaDrop = " ";
                 //     for (var AssetTypefilter = 0; AssetTypefilter < FilterData[i].filters.length; AssetTypefilter++) {
@@ -379,7 +393,7 @@ class AssetDetails extends Component {
                 //         AssetTypedrop: AssetTypeAreaDrop
                 //     })
                 // }
-                else if (FilterData[i].Type == "Sales Initiatives") {
+                /*else if (FilterData[i].Type == "Sales Initiatives") {
                     console.log(FilterData[i].Type);
                     var SalesPlayAreaDrop = " ";
                     for (var SalesPlayfilter = 0; SalesPlayfilter < FilterData[i].filters.length; SalesPlayfilter++) {
@@ -388,7 +402,7 @@ class AssetDetails extends Component {
                     this.setState({
                         SalesPlaydrop: SalesPlayAreaDrop
                     })
-                }
+                }*/
                 else if (FilterData[i].Type == "Asset  Type") {
                     console.log(FilterData[i].Type);
                     for (var j = 0; j < FilterData[i].filters.length; j++) {
@@ -624,9 +638,9 @@ class AssetDetails extends Component {
             SolutionAreaArray = [], p;
             SolutionAreaArray.push({ Value: this.state.AssetFormSelection });
         var dropDownIndustry = document.getElementById('Industry'), q;
-        var dropDownPlatform = document.getElementById('Platform'), r;
+        //var dropDownPlatform = document.getElementById('Platform'), r;
         // var dropDownAssetType = document.getElementById('AssetType'), t;
-        var dropDownSalesPlay = document.getElementById('SalesPlay'), k;
+        //var dropDownSalesPlay = document.getElementById('SalesPlay'), k;
         
         for (p = 0; p < dropDown.options.length; p += 1) {
             if (dropDown.options[p].selected) {
@@ -642,12 +656,12 @@ class AssetDetails extends Component {
                 SolutionAreaArray.push({ Value: dropDownIndustry.options[q].value });
             }
         }
-        for (r = 0; r < dropDownPlatform.options.length; r += 1) {
+       /* for (r = 0; r < dropDownPlatform.options.length; r += 1) {
             if (dropDownPlatform.options[r].selected) {
                 //countryArray.push( dropDown.options[i].value); //If you need only values 
                 SolutionAreaArray.push({ Value: dropDownPlatform.options[r].value });
             }
-        }
+        }*/
         // for (t = 0; t < dropDownAssetType.options.length ; t += 1) {
         //     if (dropDownAssetType.options[t].selected) {
         //         //countryArray.push( dropDown.options[i].value); //If you need only values 
@@ -658,13 +672,13 @@ class AssetDetails extends Component {
         //Push for AssetType
         // SolutionAreaArray.push({Value: this.state.AssetFormSelection });
 
-        for (k = 0; k < dropDownSalesPlay.options.length; k += 1) {
+        /*for (k = 0; k < dropDownSalesPlay.options.length; k += 1) {
             if (dropDownSalesPlay.options[k].selected) {
                 //countryArray.push( dropDown.options[i].value); //If you need only values 
                 SolutionAreaArray.push({ Value: dropDownSalesPlay.options[k].value });
             }
             // console.log(SolutionAreaArray);
-        }
+        }*/
         //var objDocumentAdded = document.getElementById('DocumentLinkAdd').children;
         var objPresentationAdded = document.getElementById('PresentationLinkAdd').children;
         var objMediaAdded = document.getElementById('MediaLinkAdd').children;
@@ -965,24 +979,24 @@ class AssetDetails extends Component {
                 document.getElementById('Industry').focus();
                 return false;
                 e.preventDefault();
-            } else if (this.state.Platform == "") {
+            } /*else if (this.state.Platform == "") {
                 alert('Please enter Asset Buyer Profile');
                 document.getElementById('Platform').focus();
                 return false;
                 e.preventDefault();
-            }
+            }*/
             // else if(this.state.AssetType ==""){
             //     alert('Please enter Assets Type');
             //     document.getElementById('AssetType').focus();
             //     return false;
             //     e.preventDefault();
             // }
-            else if (this.state.SalesPlay == "") {
+           /* else if (this.state.SalesPlay == "") {
                 alert('Please enter Asset Sales Initiatives');
                 document.getElementById('SalesPlay').focus();
                 return false;
                 e.preventDefault();
-            }
+            }*/
         }
 
         if (this.state.mdeValue == "") {
@@ -1243,7 +1257,7 @@ class AssetDetails extends Component {
                             <Col sm={8}>
                                 <div className="text-center col-md-12 Heading">{this.state.msg}</div>
                             </Col>
-                            <Col sm={4}>
+                            {/*<Col sm={4}>
                                 <Dropdown disabled={this.state.id ? true : false}>
                                     <Dropdown.Toggle id="dropdown-basic" disabled={this.state.id ? true : false}>
                                         Select Asset Type -  {this.state.AssetFormSelectionLabel}
@@ -1256,7 +1270,7 @@ class AssetDetails extends Component {
                                         </Dropdown.Menu>}
 
                                 </Dropdown>
-                            </Col>
+                                            </Col>*/}
                         </Row>
 
                         {/* id---170k5dr4xvz====Packaged solutions {this.state.AssetFormSelection == "170k5dr4xvz" &&*/}
@@ -1287,45 +1301,46 @@ class AssetDetails extends Component {
                                     </Row>
                                    <Row>
                                       
-                                        <Form.Group as={Col} md={12} >
+                                        <Form.Group as={Col} md={6} >
                                             <Form.Label>Solution Area <sup>*</sup><span title="Select all solution areas this asset involves ">&#x1f6c8;</span></Form.Label>
                                          
                                             <Form.Control as="select" multiple id="SolutionArea" name='SolutionArea' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.solutionFilterdrop }}>
 
                                             </Form.Control>
                                         </Form.Group>
-                                       
-
-                                    </Row>
-                                    <Row>
-                                        {/* <Form.Group as={Col} md={6} >
-                                            <Form.Label>Industry <sup>*</sup><span title="All Industries this asset directly addresses should be selected">&#x1f6c8;</span></Form.Label>
-                                            <Form.Control as="select" multiple id="Industry" name='Industry' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.IndustryFilterdrop }}>
-                                            </Form.Control>
-                                        </Form.Group> */}
-                                         <Form.Group as={Col} md={6} >
+                                        <Form.Group as={Col} md={6} >
                                             <Form.Label>Industry <sup>*</sup><span title="All Industries this asset directly addresses should be selected">&#x1f6c8;</span></Form.Label>
                                             <Form.Control as="select" multiple id="Industry" name='Industry' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.IndustryFilterdrop }}>
                                             </Form.Control>
                                         </Form.Group>
+
+                                    </Row>
+                                    {/*<Row>
+                                         <Form.Group as={Col} md={6} >
+                                            <Form.Label>Industry <sup>*</sup><span title="All Industries this asset directly addresses should be selected">&#x1f6c8;</span></Form.Label>
+                                            <Form.Control as="select" multiple id="Industry" name='Industry' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.IndustryFilterdrop }}>
+                                            </Form.Control>
+                                        </Form.Group> 
+                                         
                                         <Form.Group as={Col} md={6} >
                                             <Form.Label>Buyer Profile <sup>*</sup><span title="All customer consumers that should be targeted with this asset should be selected">&#x1f6c8;</span></Form.Label>
                                             <Form.Control as="select" multiple id="Platform" name='Platform' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.PlatformFilterdrop }}>
                                             </Form.Control>
                                         </Form.Group>
                                         
-                                    </Row>
+                                    </Row>*/}
                                     <Row>
                                          
                                         {/* <Form.Group as={Col}  md={6} >
-                     <Form.Label>Assets Type <sup>*</sup><span title="All the different types of collateral that belong to this asset should be selected. this asset should be selected">&#x1f6c8;</span></Form.Label>
-                        <Form.Control as="select" multiple id="AssetType" name='AssetType' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.AssetTypedrop }}> 
-                        </Form.Control>
-                  </Form.Group> */}<Form.Group as={Col} md={6} >
+                                            <Form.Label>Assets Type <sup>*</sup><span title="All the different types of collateral that belong to this asset should be selected. this asset should be selected">&#x1f6c8;</span></Form.Label>
+                                            <Form.Control as="select" multiple id="AssetType" name='AssetType' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.AssetTypedrop }}> 
+                                             </Form.Control>
+                                            </Form.Group>
+                                        <Form.Group as={Col} md={6} >
                                             <Form.Label>Sales Initiatives <sup>*</sup><span title="All the different types of collateral that belong to this asset should be selected.">&#x1f6c8;</span></Form.Label>
                                             <Form.Control as="select" multiple id="SalesPlay" name='SalesPlay' onChange={e => this.handleChange(e)} dangerouslySetInnerHTML={{ __html: this.state.SalesPlaydrop }}>
                                             </Form.Control>
-                                        </Form.Group>
+                                        </Form.Group> */}
                                         <Form.Group as={Col} md={6} >
                                             <Form.Label>{this.state.AssetFormSelectionLabel} Expiry Tenure <span title="All assets will automatically default to 6 months expiration. Kindly select suitable value, if asset tenure needs to be more than 6 months">&#x1f6c8;</span></Form.Label>
                                             <br />
@@ -1348,14 +1363,14 @@ class AssetDetails extends Component {
                                     {(this.state.AssetFormSelection == '170k5dr4xvz') &&
                                         <Row>
                                             <Form.Group as={Col} md={6} >
-                                                <Form.Label>Customer <span title="Please ensure this is the Oracle standard name, not an abbreviation
+                                                <Form.Label>Customer Name <span title="Please ensure this is the Oracle standard name, not an abbreviation
                         Examples: Development Center, not DC">&#x1f6c8;</span></Form.Label>
                                                 <Form.Control type="text" id="Customer" name='Customer' maxLength="255"
                                                     value={this.state.Customer}
                                                     onChange={e => this.handleChange(e)} placeholder="Enter Customer" />
                                             </Form.Group>
                                             <Form.Group as={Col} md={6} >
-                                                <Form.Label>Service Request Id </Form.Label>
+                                                <Form.Label>Service Request ID </Form.Label>
                                                 <Form.Control type="text" id="ScrmID" name='ScrmID' maxLength="20"
                                                     value={this.state.ScrmID}
                                                     onChange={e => this.handleChange(e)} placeholder="Enter Service Request ID" />
@@ -1384,7 +1399,7 @@ class AssetDetails extends Component {
                                             <Form.Label>Upload  Video Link <span title="Attach the default business video link of the asset from OTube/Youtube.">&#x1f6c8;</span></Form.Label>
                                             <Form.Control type="text" id="video_link" name='video_link' maxLength="255"
                                                 value={this.state.video_link}
-                                                onChange={e => this.handleChange(e)} placeholder="Enter Otube/Youtube Embed Link" />
+                                                onChange={e => this.handleChange(e)} placeholder="Enter Otube / Youtube Embed link" />
 
                                             {/* <Form.Control as="file">
                        

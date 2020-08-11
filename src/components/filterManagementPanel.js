@@ -16,6 +16,7 @@ import ImageCard from './imageCard/FilterImageCard';
 import UnMapCards from './imageCard/unmapImageCard';
 import FiltersList from './filters/filterListSelection';
 import Mappedfilters from './filters/mappedFilters';
+import Modal from 'react-bootstrap/Modal';
 // import UNSelectALL from './UnselectAll';
 
 // import {
@@ -38,7 +39,12 @@ export class FilterManagemnt extends Component {
         class: 'section',
         FilterDataList: [],
         buttonParam: '+',
-        classDeactive: ""
+        classDeactive: "",
+        modelView:false,
+        modelSelectedFilter:null,
+        modelSelectedFilterSecondaryOptions:[],
+        secondaryFilterName:''
+        
     }
 
     handleClick(val, e) {
@@ -503,6 +509,86 @@ export class FilterManagemnt extends Component {
     //     document.getElementById("FilterPanel").classList.remove('hide');
 
     //   }
+
+    onAppoveFilterSecondary = (e, img ,name) => {
+        if(this.state.secondaryFilterName.length<1 || this.state.secondaryFilterName == null|| this.state.secondaryFilterName ==''){
+            alert("Please enter a valid Secondary Menu Option");
+            return;
+        }
+        var objJson = [];
+        
+                var data = {
+                    "filter_type":e,
+                    "filter_name": name,
+                  //  "filter_image": document.getElementById('ImageSecFilter' + e).innerHTML,
+                    "filter_type_l2": "",
+                    "sec_filter_name":this.state.secondaryFilterName
+                };
+                objJson.push(data);
+
+          
+        if (objJson.length >= 1) {
+            var reqParms = {
+                "child_filter": objJson,
+                "existingFilter": 1,
+                "filter_type": e,
+                "filter_status": 1,
+                "filter_type_image": img,
+                "user_email": sessionStorage.getItem("user_email")
+
+            }
+            var url = global.Ip + global.Port + "/admin/addnewfilter";
+            axios.post(url, reqParms, {
+                headers: {
+                    "user_email": sessionStorage.getItem("user_email")
+
+                }
+            }).then(response => {
+                alert('inserted successfully');
+                this.setState({secondaryFilterName:''});
+                this.setState({modelView:false});
+                if ((sessionStorage.getItem('user_email') != "") && (sessionStorage.getItem('user_email') != null) && (sessionStorage.getItem('user_email') != undefined)) {
+                    axios.get(global.Ip + global.Port + '/asset/allfilters', {
+                        headers: {
+                            "user_email": sessionStorage.getItem('user_email'),
+                            "platform":"w"
+
+
+                        }
+                    })
+                        .then(res => {
+                            const FilterDataList = res.data.allFilters;
+                            this.setState({ FilterDataList });
+                            global.filterData = FilterDataList;
+                            global.FilterDataList = FilterDataList;
+                            global.FilterDataMapList = FilterDataList;
+                            this.setState({modelView:false});
+                            // this.setState({ classDeactive: response.data.message});
+
+                        })
+                }
+
+
+            });
+
+        } else {
+            alert('nothing selected');
+            return false;
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
     onAppoveFilter = (e, img) => {
 
         var objDocumentAdded = document.getElementById('ChildFilter' + e + 'Add').children;
@@ -1470,14 +1556,15 @@ export class FilterManagemnt extends Component {
         } else {
 
             var arrAsset = [];
-            var assetEle = document.getElementById("dataAssetShowUnMap")
+            var assetEle = document.getElementById("dataAssetShowUnMap");
+            
             if (assetEle) {
 
                 var lis = document.getElementById("dataAssetShowUnMap").getElementsByTagName("input");
                 var i;
                 //var 
                 for (i = 0; i < lis.length; i++) {
-                    if (lis[i].hasAttribute("checked") == false) {
+                    if (lis[i].hasAttribute("checked") == true) {
                         //if(lis[i].getAttribute("checked") == false){
                         var SplitIdPanel = (lis[i].getAttribute("id")).split('Panel');
 
@@ -1496,13 +1583,14 @@ export class FilterManagemnt extends Component {
 
             //     arrAsset.push(global.assetUnMapData[i].ASSET_ID);
             // }
-            var winEle = document.getElementById("dataWinShowUnMap")
+            var arrWin = [];
+            var winEle = document.getElementById("dataWinShowUnMap");
+            
             if (winEle) {
                 var lis = document.getElementById("dataWinShowUnMap").getElementsByTagName("input");
                 var i;
-                var arrWin = [];
                 for (i = 0; i < lis.length; i++) {
-                    if (lis[i].hasAttribute("checked") == false) {
+                    if (lis[i].hasAttribute("checked") == true) {
                         var SplitIdPanel = (lis[i].getAttribute("id")).split('Panel');
 
                         arrWin.push(SplitIdPanel[0]);
@@ -1757,7 +1845,7 @@ export class FilterManagemnt extends Component {
                             Winitems[i].checked = true;
                             var att = document.createAttribute("checked");       // Create a "class" attribute
                             att.value = "checked";
-                            Assetitems[i].setAttributeNode(att);
+                            Winitems[i].setAttributeNode(att);
 
                         }
                     }
@@ -2357,6 +2445,8 @@ export class FilterManagemnt extends Component {
                             }
                         })
                             .then(res => {
+                                this.setState({secondaryFilterName:''});
+                                this.setState({modelView:false});
                                 const FilterDataList = res.data.allFilters;
                                 this.setState({ FilterDataList });
                                 global.filterData = FilterDataList;
@@ -2581,9 +2671,113 @@ export class FilterManagemnt extends Component {
             document.getElementById(e + 'Add').appendChild(cln);
         }
     }
+
+    OpenSecondaryMenuPanel(id,indexRoot,e){
+        let SelectedFilter = this.state.FilterDataList[indexRoot];
+        console.log("This is my selected filter");
+        console.log(SelectedFilter);
+        this.setState({modelSelectedFilter:SelectedFilter});
+        for(let i=0;i<SelectedFilter.filters.length;i++){
+            if(id===SelectedFilter.filters[i].FILTER_ID){
+                this.setState({modelSelectedFilterOptions:SelectedFilter.filters[i]});
+                break;
+            }
+
+        }
+        
+        this.setState({modelView:true});
+    }
+
+    checkDuplicateSecondary=(e)=>{
+        let secondaryFilteredNameEntered = this.state.secondaryFilterName.trim().replace(/ +(?= )/g,'');;
+
+        this.state.modelSelectedFilterOptions.SECONDARY.forEach(element => {
+            if(element.SEC_FILTER_NAME === secondaryFilteredNameEntered){
+                alert("Secondary Filter with the same name already exists");
+                return false;
+            }
+            
+        });
+        
+    }
+    returnModelView=()=>{
+        if(this.state.modelSelectedFilter == null || this.state.modelSelectedFilter == undefined){
+            return;
+        }
+
+        return (
+            <Modal show={this.state.modelView} onHide={()=>{this.setState({modelView:false})}}  aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modelClass">
+                <Modal.Header>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        {this.state.modelSelectedFilter.Type}
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>{this.state.modelSelectedFilterOptions.FILTER_NAME}</h4>
+                    <strong>Available Secondary Filters</strong>
+                    <div>
+                    <ListGroup id={this.state.modelSelectedFilter.Type} className="show">
+                        {this.state.modelSelectedFilterOptions.SECONDARY.map((Filters, index) =>
+
+                                <ListGroup.Item >
+                                    {['checkbox'].map(type => (
+                                        <>
+                                            <div key={Filters.FILTER_ID} data-id={Filters.SEC_FILTER_NAME} >
+                                                <span class="deletefilerPanelSecondary">{Filters.SEC_FILTER_NAME}</span>  <span class="deleteItem" onClick={(e) => this.deleteBox(Filters.SEC_FILTER_NAME, Filters.FILTER_ID)} custom
+                                                    type={type}
+                                                    dataType={this.state.modelSelectedFilter.Type}
+                                                    dataName={Filters.SEC_FILTER_NAME}
+                                                    dataImage={Filters.FILTER_IMAGE}
+                                                    id={Filters.FILTER_ID}
+                                                > &times; </span>
+
+
+
+                                            </div>
+
+                                        </>
+                                    ))}
+
+                                </ListGroup.Item>
+
+
+                            )}
+
+
+                        {/* popup */}
+
+
+                        {/* <Button variant="outline-primary mt-20" size="sm" onClick={(e) => this.onEditfilter(FilterData.Type)}>SAVE</Button> */}
+
+                    </ListGroup>
+                    {/* <ul>
+                    {this.state.modelSelectedFilterOptions.SECONDARY.map((opt,index)=>
+                       
+                            <li key={opt.FILTER_ID}><span>- </span>{opt.SEC_FILTER_NAME}</li>
+                        
+                    )}
+                    </ul> */}
+                    </div>
+                    <div class="form-group  filterfrm col-md-12 mt-20" id={"SecFilter" + this.state.modelSelectedFilter.Type + "frm"}>
+                        <div id={"SecFilter" + this.state.modelSelectedFilter.Type} className="mt-20 ">
+                            <label for="secondaryInput"><strong>Add Filter</strong></label>
+                            <input name="secondaryInput" type="text" class="form-control" id={"EnterSecFilter" + this.state.modelSelectedFilter.Type + "Data"} placeholder="Add Secondary Filter"
+                            onBlur={(ev) =>this.checkDuplicateSecondary()} value={this.state.secondaryFilterName} onChange={(e)=>this.setState({secondaryFilterName:e.target.value})}/>
+                            <input class="mt-20" type="file" accept=".jpg,.png,.jpeg" id="secondaryFileSelect" encType="multipart/form-data" name="file" onChange={e => this.UploadDirectSubChild(e)}/>
+                        </div>
+                        <div id={"SecFilter" + this.state.modelSelectedFilter.Type + "Add"} ></div>
+                            <Button variant="btn btn-primary mt-20" size="sm" data-id='DocumentLink' onClick={(e) => this.onAppoveFilterSecondary(this.state.modelSelectedFilter.Type, this.state.modelSelectedFilter.FILTER_TYPE_IMAGE,this.state.modelSelectedFilterOptions.FILTER_NAME)} >Save</Button>
+                    </div>
+                   </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={()=>{this.setState({modelView:false})}}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
     render() {
         //    alert(global.dataName);
-        function selectBox(id) {
+        function selectBox(id,type=null) {
             //  alert(id);
 
             // var d = document.getElementById("CategoryBox").value;
@@ -2600,10 +2794,11 @@ export class FilterManagemnt extends Component {
                             document.getElementById(id).value = "";
                             return false;
                         }
-                    } else {
+                    } else if(type!= null){
+                        
                         if ((FilterData[k].filters).length > 0) {
                             //  alert("test");
-
+                            if(FilterData[k].Type != type) continue;
                             for (var j = 0; j < (FilterData[k].filters).length; j++) {
                                 console.log("filterL2" + FilterData[k].filters[j].FILTER_NAME);
                                 if ((FilterData[k].filters[j].FILTER_NAME).toLowerCase() == strUser.toLowerCase()) {
@@ -2748,6 +2943,8 @@ export class FilterManagemnt extends Component {
 
         return (
             <div className="App">
+
+                {this.returnModelView()}
                 <Header />
                 <div className="BodyContainer mt-4">
                     <div class="Pull-right col-md-12"><a href="javascript:history.back(-1)">&#x2190; &nbsp;Back to Previous Screen</a></div>
@@ -2756,7 +2953,7 @@ export class FilterManagemnt extends Component {
 
                         <div className="text-center col-md-12 Heading">{this.state.msg}</div>
 
-                        <Row>
+                        <Row className="col-md-4">
                             <Col md={12}>
                                 <div className="title flex">
                                     <div class="nowrap">FILTER MANAGEMENT</div>
@@ -2830,7 +3027,7 @@ export class FilterManagemnt extends Component {
                                     <Tab eventKey="AddChild" title="Add Child Filter To The Existing filter">
                                         <div class="collaps  filterMgmnt">
 
-                                            {this.state.FilterDataList.map((FilterData, index) =>
+                                            {this.state.FilterDataList.map((FilterData, indexRoot) =>
                                                 <>
                                                     {FilterData.Type != null &&
                                                         <>
@@ -2847,7 +3044,7 @@ export class FilterManagemnt extends Component {
                                                                     {FilterData.filters.map((Filters, index) =>
                                                                         <ListGroup.Item >
                                                                             {['checkbox'].map(type => (
-                                                                                <div className="col-md-12" key={Filters.FILTER_ID} data-id={Filters.FILTER_NAME}>
+                                                                                <div className="col-md-12" key={Filters.FILTER_ID} data-id={Filters.FILTER_NAME} onClick={(e)=>this.OpenSecondaryMenuPanel(Filters.FILTER_ID,indexRoot,e)}>
                                                                                     {Filters.FILTER_NAME}
 
                                                                                 </div>
@@ -2860,7 +3057,7 @@ export class FilterManagemnt extends Component {
                                                                             <input type="text" class="form-control" id={"EnterChildFilter" + FilterData.Type + "Data"} placeholder="Add Filter" onBlur={(ev) => {
                                                                                 // console.log(`Pressed keyCode ${ev.key}`);
                                                                                 //  if (ev.key === 'Enter') {
-                                                                                selectBox("EnterChildFilter" + FilterData.Type + "Data");
+                                                                                selectBox("EnterChildFilter" + FilterData.Type + "Data",FilterData.Type);
                                                                                 ev.preventDefault();
                                                                                 // }
                                                                             }} />
@@ -3150,31 +3347,36 @@ export class FilterManagemnt extends Component {
 
                                     </Tab>
                                     <Tab eventKey="Map" title="Map Filter">
+                                    <div className="row">
+                                        <div class="collaps  pull-left col-md-3">
 
-                                        <div class="collaps  pull-left">
 
+                                                <div className="filters" id="SortFilterMapSection">
+                                                    <Form>
+                                                        <Mappedfilters onChange={this.mappingOnChange.bind(this)} />
 
-                                            <div className="filters" id="SortFilterMapSection">
-                                                <Form>
-                                                    <Mappedfilters onChange={this.mappingOnChange.bind(this)} />
+                                                    </Form>
+                                                </div>
 
-                                                </Form>
+                                        </div>
+                                        <div className="col-md-9">
+                                            <div class="mapSearch">
+                                                <Search onChange={this.searchOnChange.bind(this)} />
                                             </div>
 
+                                            <ImageCard onChange={this.mappingImageOnChange.bind(this)} />
+
+
+
+                                            <div class="clearfix text-center mb-20 stickyButtonFooter">
+                                                <p>This action will Map selected Assets/Wins to selected filters</p>
+                                                <button type="button" class="btn btn-primary" onClick={(e) => this.ApplyFilters(e)} >Apply Mapping</button>
+                                            </div>
                                         </div>
+                                    </div>
+                                        
 
-                                        <div class="mapSearch">
-                                            <Search onChange={this.searchOnChange.bind(this)} />
-                                        </div>
-
-                                        <ImageCard onChange={this.mappingImageOnChange.bind(this)} />
-
-
-
-                                        <div class="clearfix text-center mb-20 stickyButtonFooter">
-                                            <p>This action will Map selected Assets/Wins to selected filters</p>
-                                            <button type="button" class="btn btn-primary" onClick={(e) => this.ApplyFilters(e)} >Apply Mapping</button>
-                                        </div>
+                                       
 
 
 
@@ -3185,8 +3387,8 @@ export class FilterManagemnt extends Component {
                                         {/* test5 */}
 
                                         {/* <Search onChange={this.searchOnChange.bind(this)}/> */}
-
-                                        <div class="collaps  pull-left">
+                                        <div className="row">
+                                            <div className="collaps  pull-left col-md-3">
 
                                             {/* <ClearFilter  onClick={this.ListOnUnMapChange.bind(this)}/> */}
 
@@ -3200,8 +3402,9 @@ export class FilterManagemnt extends Component {
                                             </div>
                                             {/* <button type="button" class="btn btn-block btn-primary" onClick={(e) => this.UnMapApplyFilters(e)} >UnMap Filter</button> */}
 
-                                        </div>
-                                        {global.selectedcheckboxUnMap != undefined && <>
+                                            </div>
+                                            <div className="col-md-9">
+                                            {global.selectedcheckboxUnMap != undefined && <>
                                             {/* <UNSelectALL /> */}
                                             <UnMapCards onChange={this.UnmappingImageOnChange.bind(this)} />
 
@@ -3210,6 +3413,10 @@ export class FilterManagemnt extends Component {
                                                 <button type="button" class="btn btn-primary" onClick={(e) => this.UnMapApplyFilters(e)} >Confirm</button>
                                             </div>
                                         </>}
+                                            </div>
+                                        </div>
+                                        
+                                        
                                     </Tab>
 
 

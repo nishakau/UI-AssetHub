@@ -30,7 +30,7 @@ export class FilterImageCard extends Component {
         global.assetData=undefined;
         axios.get(global.Ip + global.Port + '/asset/allAssetsFilters', {
             headers: {
-                filters: "170k5dr4xvz",
+                
                 sortBy: "createdDate",
                 order: "desc",
                 "offset":0,

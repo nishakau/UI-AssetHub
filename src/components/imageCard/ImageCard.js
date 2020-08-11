@@ -193,34 +193,34 @@ export class ImageCard extends Component {
         }
 
         if (global.assetData != undefined) {
-            // AssetDatanew = global.assetData;
-            AssetDatanew = global.assetData.filter(function (el) {
-                if(el.GROUP_TYPE.length <1) return;
-                return el.GROUP_TYPE[0].FILTER_ID === "170k5dr4xvz";
-            });
-            onlyWorkshopData = global.assetData.filter(function (el) {
-                if(el.GROUP_TYPE.length <1) return;
-                return el.GROUP_TYPE[0].FILTER_ID === "dq7k9lprfox";
-            });
-            onlyWhitePaper = global.assetData.filter(function (el) {
-                if(el.GROUP_TYPE.length <1) return;
-                return el.GROUP_TYPE[0].FILTER_ID === "dq7k9sdgroc"
-            });
+            AssetDatanew = global.assetData;
+            // AssetDatanew = global.assetData.filter(function (el) {
+            //     if(el.GROUP_TYPE.length <1) return;
+            //     return el.GROUP_TYPE[0].FILTER_ID === "170k5dr4xvz";
+            // });
+            // onlyWorkshopData = global.assetData.filter(function (el) {
+            //     if(el.GROUP_TYPE.length <1) return;
+            //     return el.GROUP_TYPE[0].FILTER_ID === "dq7k9lprfox";
+            // });
+            // onlyWhitePaper = global.assetData.filter(function (el) {
+            //     if(el.GROUP_TYPE.length <1) return;
+            //     return el.GROUP_TYPE[0].FILTER_ID === "dq7k9sdgroc"
+            // });
             // console.log(global.assetData.length + ' AssetDatanew' + AssetDatanew.length + 'onlyWorkshopData' + onlyWorkshopData.length)
         } else {
-            //AssetDatanew = this.state.AssetData;
-            AssetDatanew = this.state.AssetData.filter(function (el) {
-                if(el.GROUP_TYPE.length <1) return;
-                return el.GROUP_TYPE[0].FILTER_ID === "170k5dr4xvz";
-            });
-            onlyWorkshopData = this.state.AssetData.filter(function (el) {
-                if(el.GROUP_TYPE.length <1) return;
-                return el.GROUP_TYPE[0].FILTER_ID === "dq7k9lprfox";
-            });
-            onlyWhitePaper = this.state.AssetData.filter(function (el) {
-                if(el.GROUP_TYPE.length <1) return;
-                return el.GROUP_TYPE[0].FILTER_ID === "dq7k9sdgroc"
-            });
+            AssetDatanew = this.state.AssetData;
+            // AssetDatanew = this.state.AssetData.filter(function (el) {
+            //     if(el.GROUP_TYPE.length <1) return;
+            //     return el.GROUP_TYPE[0].FILTER_ID === "170k5dr4xvz";
+            // });
+            // onlyWorkshopData = this.state.AssetData.filter(function (el) {
+            //     if(el.GROUP_TYPE.length <1) return;
+            //     return el.GROUP_TYPE[0].FILTER_ID === "dq7k9lprfox";
+            // });
+            // onlyWhitePaper = this.state.AssetData.filter(function (el) {
+            //     if(el.GROUP_TYPE.length <1) return;
+            //     return el.GROUP_TYPE[0].FILTER_ID === "dq7k9sdgroc"
+            // });
             // console.log(this.state.AssetData.length + ' this.state.AssetData' + AssetDatanew.length + 'onlyWorkshopData' + onlyWorkshopData.length)
 
         }
@@ -498,7 +498,7 @@ export class ImageCard extends Component {
                                 )}
                         </Tab>
 
-                        <Tab eventKey="Workshops" title="Workshops">
+                        <Tab eventKey="Workshops" title="Workshops" tabClassName="displayNone">
                             {onlyWorkshopData.length != 0 ? (
                                 <div id="dataAssetShow" class="col-md-12">
 
@@ -602,7 +602,7 @@ export class ImageCard extends Component {
 
                         </Tab>
 
-                        <Tab eventKey="WhitePapers" title="White Papers">
+                        <Tab eventKey="WhitePapers" title="White Papers" tabClassName="displayNone">
                             {onlyWhitePaper.length != 0 ? (
                                 <div id="dataAssetShow" class="col-md-12">
 

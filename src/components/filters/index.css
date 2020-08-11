@@ -42,3 +42,13 @@ html {
     font-size: 14px;
     color:#666;
 }
+
+.expand_left{
+    float: left;
+    margin-right: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color:#666;
+    cursor: pointer;
+}
