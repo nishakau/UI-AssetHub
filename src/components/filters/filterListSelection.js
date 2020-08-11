@@ -31,6 +31,7 @@ export class FiltersList extends Component {
 		return {};
     }
     componentDidMount() {
+        global.selectedcheckboxUnMap = undefined;
         if((sessionStorage.getItem('user_email')!="") && (sessionStorage.getItem('user_email')!=null) && (sessionStorage.getItem('user_email')!=undefined))
         {
         axios.get(global.Ip + global.Port + '/asset/allfilters',{
@@ -55,7 +56,7 @@ export class FiltersList extends Component {
         // alert(global.selectedcheckbox);
         if(global.selectedcheckboxUnMap!=undefined){
             // alert('1111');
-            j+=global.selectedcheckboxUnMap +','+event.target.getAttribute("id");
+           
             // alert(global.selectedcheckbox.indexOf(event.target.getAttribute("id")));
             if(global.selectedcheckboxUnMap.indexOf(event.target.getAttribute("id")) != -1 ){
                 var array=global.selectedcheckboxUnMap.split(',');
@@ -66,7 +67,12 @@ export class FiltersList extends Component {
                     }
                 }
 
-            }else{}
+            }else{
+                j+=global.selectedcheckboxUnMap +','+event.target.getAttribute("id");
+                    
+                }
+                
+            
         }else{
             j=event.target.getAttribute("id");
            
@@ -94,7 +100,7 @@ export class FiltersList extends Component {
                         <ul>
                             {fdata.SECONDARY.map((secondary)=>(
                                 <li key={secondary.FILTER_ID}>
-		                            <input  type="checkbox" id={secondary.FILTER_ID} name="filterData" onClick={filterBox}/>
+		                            <input  type="checkbox" id={secondary.FILTER_ID} name="filterData" onClick={filterBox} defaultChecked={false}/>
 						           
 						            <span className="ml-2px"> {secondary.SEC_FILTER_NAME + ' ('+(secondary.ASSET_COUNT + secondary.WINSTORY_COUNT)+')'}</span> 
                                 </li>
@@ -110,7 +116,7 @@ export class FiltersList extends Component {
             return (
                 <>
 		
-				        <input  type="checkbox" id={fdata.FILTER_ID} name="filterData" onClick={filterBox}/>
+				        <input  type="checkbox" id={fdata.FILTER_ID} name="filterData" onClick={filterBox} defaultChecked={false}/>
 						<span className="ml-2px">{fdata.FILTER_NAME + ' ('+(fdata.ASSET_COUNT + fdata.WINSTORY_COUNT)+')'}</span>
 						
                 </> 
