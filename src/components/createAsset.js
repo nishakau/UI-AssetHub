@@ -1257,7 +1257,7 @@ class AssetDetails extends Component {
                             <Col sm={8}>
                                 <div className="text-center col-md-12 Heading">{this.state.msg}</div>
                             </Col>
-                            <Col sm={4}>
+                            {/*<Col sm={4}>
                                 <Dropdown disabled={this.state.id ? true : false}>
                                     <Dropdown.Toggle id="dropdown-basic" disabled={this.state.id ? true : false}>
                                         Select Asset Type -  {this.state.AssetFormSelectionLabel}
@@ -1270,7 +1270,7 @@ class AssetDetails extends Component {
                                         </Dropdown.Menu>}
 
                                 </Dropdown>
-                            </Col>
+                                            </Col>*/}
                         </Row>
 
                         {/* id---170k5dr4xvz====Packaged solutions {this.state.AssetFormSelection == "170k5dr4xvz" &&*/}

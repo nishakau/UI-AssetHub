@@ -1556,14 +1556,15 @@ export class FilterManagemnt extends Component {
         } else {
 
             var arrAsset = [];
-            var assetEle = document.getElementById("dataAssetShowUnMap")
+            var assetEle = document.getElementById("dataAssetShowUnMap");
+            
             if (assetEle) {
 
                 var lis = document.getElementById("dataAssetShowUnMap").getElementsByTagName("input");
                 var i;
                 //var 
                 for (i = 0; i < lis.length; i++) {
-                    if (lis[i].hasAttribute("checked") == false) {
+                    if (lis[i].hasAttribute("checked") == true) {
                         //if(lis[i].getAttribute("checked") == false){
                         var SplitIdPanel = (lis[i].getAttribute("id")).split('Panel');
 
@@ -1582,13 +1583,14 @@ export class FilterManagemnt extends Component {
 
             //     arrAsset.push(global.assetUnMapData[i].ASSET_ID);
             // }
-            var winEle = document.getElementById("dataWinShowUnMap")
+            var arrWin = [];
+            var winEle = document.getElementById("dataWinShowUnMap");
+            
             if (winEle) {
                 var lis = document.getElementById("dataWinShowUnMap").getElementsByTagName("input");
                 var i;
-                var arrWin = [];
                 for (i = 0; i < lis.length; i++) {
-                    if (lis[i].hasAttribute("checked") == false) {
+                    if (lis[i].hasAttribute("checked") == true) {
                         var SplitIdPanel = (lis[i].getAttribute("id")).split('Panel');
 
                         arrWin.push(SplitIdPanel[0]);
@@ -1843,7 +1845,7 @@ export class FilterManagemnt extends Component {
                             Winitems[i].checked = true;
                             var att = document.createAttribute("checked");       // Create a "class" attribute
                             att.value = "checked";
-                            Assetitems[i].setAttributeNode(att);
+                            Winitems[i].setAttributeNode(att);
 
                         }
                     }
@@ -2443,6 +2445,8 @@ export class FilterManagemnt extends Component {
                             }
                         })
                             .then(res => {
+                                this.setState({secondaryFilterName:''});
+                                this.setState({modelView:false});
                                 const FilterDataList = res.data.allFilters;
                                 this.setState({ FilterDataList });
                                 global.filterData = FilterDataList;
@@ -2702,7 +2706,7 @@ export class FilterManagemnt extends Component {
         }
 
         return (
-            <Modal show={this.state.modelView} onHide={()=>{this.setState({modelView:false})}} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={this.state.modelView} onHide={()=>{this.setState({modelView:false})}}  aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modelClass">
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                         {this.state.modelSelectedFilter.Type}
@@ -2710,15 +2714,49 @@ export class FilterManagemnt extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <h4>{this.state.modelSelectedFilterOptions.FILTER_NAME}</h4>
-                    <p>Available Secondary Filters</p>
+                    <strong>Available Secondary Filters</strong>
                     <div>
-                    <ul>
+                    <ListGroup id={this.state.modelSelectedFilter.Type} className="show">
+                        {this.state.modelSelectedFilterOptions.SECONDARY.map((Filters, index) =>
+
+                                <ListGroup.Item >
+                                    {['checkbox'].map(type => (
+                                        <>
+                                            <div key={Filters.FILTER_ID} data-id={Filters.SEC_FILTER_NAME} >
+                                                <span class="deletefilerPanelSecondary">{Filters.SEC_FILTER_NAME}</span>  <span class="deleteItem" onClick={(e) => this.deleteBox(Filters.SEC_FILTER_NAME, Filters.FILTER_ID)} custom
+                                                    type={type}
+                                                    dataType={this.state.modelSelectedFilter.Type}
+                                                    dataName={Filters.SEC_FILTER_NAME}
+                                                    dataImage={Filters.FILTER_IMAGE}
+                                                    id={Filters.FILTER_ID}
+                                                > &times; </span>
+
+
+
+                                            </div>
+
+                                        </>
+                                    ))}
+
+                                </ListGroup.Item>
+
+
+                            )}
+
+
+                        {/* popup */}
+
+
+                        {/* <Button variant="outline-primary mt-20" size="sm" onClick={(e) => this.onEditfilter(FilterData.Type)}>SAVE</Button> */}
+
+                    </ListGroup>
+                    {/* <ul>
                     {this.state.modelSelectedFilterOptions.SECONDARY.map((opt,index)=>
                        
                             <li key={opt.FILTER_ID}><span>- </span>{opt.SEC_FILTER_NAME}</li>
                         
                     )}
-                    </ul>
+                    </ul> */}
                     </div>
                     <div class="form-group  filterfrm col-md-12 mt-20" id={"SecFilter" + this.state.modelSelectedFilter.Type + "frm"}>
                         <div id={"SecFilter" + this.state.modelSelectedFilter.Type} className="mt-20 ">

@@ -1022,3 +1022,18 @@ div.tooltipDiv:hover  + div.kckgBd
   .displayNone{
     display: none;
   }
+
+
+  .deletefilerPanelSecondary{
+    display:inline-block;
+    float: left;
+    min-width: 600px;
+    cursor: pointer;
+  }
+
+
+  .modelClass{
+
+    max-width: 650px;
+    min-width: 400px;
+  }
