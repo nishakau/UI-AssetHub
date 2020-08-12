@@ -57,7 +57,6 @@ export class FilterImageCard extends Component {
         //       }
         axios.get(global.Ip + global.Port + '/winstory/getAllWinStoryByFilters', {
             headers: {
-                filters: "14983ddhswcdol",
                 limit: -1,
                 offset: 0,
                 sortBy: "createdDate",
