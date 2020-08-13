@@ -31,6 +31,7 @@ export class FiltersList extends Component {
 		return {};
     }
     componentDidMount() {
+        global.selectedMapcheckbox = undefined;
         if((sessionStorage.getItem('user_email')!="") && (sessionStorage.getItem('user_email')!=null) && (sessionStorage.getItem('user_email')!=undefined))
         {
             
@@ -56,7 +57,7 @@ export class FiltersList extends Component {
         //  alert(global.selectedcheckbox);
         if(global.selectedMapcheckbox!=undefined){
             // alert('1111');
-            j+=global.selectedMapcheckbox +','+event.target.getAttribute("id");
+            
             // alert(global.selectedcheckbox.indexOf(event.target.getAttribute("id")));
             if(global.selectedMapcheckbox.indexOf(event.target.getAttribute("id")) != -1 ){
                 var array=global.selectedMapcheckbox.split(',');
@@ -67,7 +68,9 @@ export class FiltersList extends Component {
                     }
                 }
 
-            }else{}
+            }else{
+                j+=global.selectedMapcheckbox +','+event.target.getAttribute("id");
+            }
         }else{
             j=event.target.getAttribute("id");
            
@@ -95,7 +98,7 @@ export class FiltersList extends Component {
                         <ul>
                             {fdata.SECONDARY.map((secondary)=>(
                                 <li key={secondary.FILTER_ID}>
-		                            <input  type="checkbox" id={secondary.FILTER_ID} name="filterData" onClick={filterBox}/>
+		                            <input  type="checkbox" id={secondary.FILTER_ID} name="filterData" onClick={filterBox} defaultChecked={false}/>
 						            <span className="ml-2px">
                                     {secondary.SEC_FILTER_NAME + ' ('+(secondary.ASSET_COUNT + secondary.WINSTORY_COUNT)+')'}
 						            </span> 
@@ -112,7 +115,7 @@ export class FiltersList extends Component {
             return (
                 <>
 		
-				        <input  type="checkbox" id={fdata.FILTER_ID} name="filterData" onClick={filterBox}/>
+				        <input  type="checkbox" id={fdata.FILTER_ID} name="filterData" onClick={filterBox} defaultChecked={false}/>
                         <span className="ml-2px"> {fdata.FILTER_NAME + ' ('+(fdata.ASSET_COUNT + fdata.WINSTORY_COUNT)+')'} </span> 
                 </>
             );
