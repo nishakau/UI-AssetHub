@@ -1037,3 +1037,11 @@ div.tooltipDiv:hover  + div.kckgBd
     max-width: 650px;
     min-width: 400px;
   }
+
+  .addSecondary:hover{
+    background-color: #f2a006;
+    -moz-box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
+    -webkit-box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
+    box-shadow: 3px 3px 3px rgba(68, 68, 68, 0.6);
+    zoom: 1.1;
+  }
