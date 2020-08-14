@@ -1152,7 +1152,13 @@ class AssetDetails extends Component {
             url = global.Ip + global.Port + '/asset/editAsset/';
             document.getElementById('loader').classList.remove('hide');
             document.getElementById('createForm').classList.add('hide');
-            axios.post(url, reqParms)
+            axios.post(url, reqParms,{
+                headers: {
+                    "user_email": sessionStorage.getItem("user_email"),
+                    "type":"edit"
+
+                }
+            })
                 .then(response => {
                     if (document.getElementById('AssetId').value == "") {
                         global.AssetIdCreated = response.data.Asset_ID;
