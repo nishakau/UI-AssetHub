@@ -516,16 +516,21 @@ export class FilterManagemnt extends Component {
             return;
         }
         var objJson = [];
-        
+        var element = document.getElementById('ImageSecFilter' + e+name);
+        if (typeof (element) != 'undefined' && element != null && element != "" && document.getElementById('ImageSecFilter' + e+name).innerHTML != "") {
                 var data = {
                     "filter_type":e,
                     "filter_name": name,
-                  //  "filter_image": document.getElementById('ImageSecFilter' + e).innerHTML,
+                    "filter_image": document.getElementById('ImageSecFilter' + e+name).innerHTML,
                     "filter_type_l2": "",
                     "sec_filter_name":this.state.secondaryFilterName
                 };
                 objJson.push(data);
-
+            }
+            else {
+                alert("Filter name and image is mandatory");
+                return false;
+            }
           
         if (objJson.length >= 1) {
             var reqParms = {
@@ -545,6 +550,11 @@ export class FilterManagemnt extends Component {
                 }
             }).then(response => {
                 alert('inserted successfully');
+                if (typeof (element) != 'undefined' && element != null && element != "") {
+                    document.getElementById('ImageSecFilter' + e+name).innerHTML = "";
+                    var el = document.getElementById('ImageSecFilter' + e+name);
+                    el.remove();
+                }
                 this.setState({secondaryFilterName:''});
                 this.setState({modelView:false});
                 if ((sessionStorage.getItem('user_email') != "") && (sessionStorage.getItem('user_email') != null) && (sessionStorage.getItem('user_email') != undefined)) {
@@ -894,6 +904,78 @@ export class FilterManagemnt extends Component {
 
 
     }
+
+    UploadDirectSubSecondaryChild = (e) => {
+        // alert(e.target.parentElement.getAttribute("id"));
+        e.preventDefault();
+        var data = new FormData()
+        var filename = e.target.files[0].name;
+        var filesize = e.target.files[0].size;
+        // console.log(filename + filesize);
+        var SplitExtn = filename.split('.');
+        // console.log(SplitExtn[1]);
+        var tolowerextn = (SplitExtn[1].toLowerCase());
+        if ((filesize <= 100000) && (tolowerextn == 'png' || tolowerextn == 'jpg' || tolowerextn == 'jpeg')) {
+            
+
+            for (const file of e.target.files) {
+                function getBase64(file, val) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                        // console.log(reader.result);
+                        // console.log(val);
+                        // if(val=="CovertedparentImage"){
+                        global.val = reader.result;
+                        var p = window.document.createElement("p");
+                        p.className = "hide";
+                        // console.log(val);
+                        console.log("from on load function");
+                        console.log(val);
+                        p.id = val;// Create a <button> element
+                        p.innerHTML = reader.result;                   // Insert text
+                        window.document.body.appendChild(p);
+                      
+                    };
+                    reader.onerror = function (error) {
+                        console.log('Error: ', error);
+                    };
+                }
+                data.append('file', file, file.name)
+               
+                var headerObj = {
+                    "type": 'thumbnail',
+                    "Content-Type": 'multipart/form-data'
+                }
+                var ConvertedChildImage = "Image" + e.target.parentElement.getAttribute("id");
+                getBase64(file, ConvertedChildImage);
+               
+
+            }
+        } else {
+            if (filesize > 100000) {
+                alert('Please upload image upto  100 kb');
+                document.getElementById(e.target.getAttribute("id")).value = "";
+                return false;
+
+            }
+            else {
+                if (tolowerextn == 'png' || tolowerextn == 'jpg' || tolowerextn == 'jpeg') {
+                }
+                else {
+
+                    alert('Please Upload either PNG or jpg/jpeg image');
+                    document.getElementById(e.target.getAttribute("id")).value = "";
+                    return false;
+
+                }
+            }
+        }
+
+    }
+
+
+
     UploadDirectSubChild = (e) => {
         // alert(e.target.parentElement.getAttribute("id"));
         e.preventDefault();
@@ -2759,11 +2841,11 @@ export class FilterManagemnt extends Component {
                     </ul> */}
                     </div>
                     <div class="form-group  filterfrm col-md-12 mt-20" id={"SecFilter" + this.state.modelSelectedFilter.Type + "frm"}>
-                        <div id={"SecFilter" + this.state.modelSelectedFilter.Type} className="mt-20 ">
+                        <div id={"SecFilter" + this.state.modelSelectedFilter.Type+""+this.state.modelSelectedFilterOptions.FILTER_NAME} className="mt-20 ">
                             <label for="secondaryInput"><strong>Add Filter</strong></label>
                             <input name="secondaryInput" type="text" class="form-control" id={"EnterSecFilter" + this.state.modelSelectedFilter.Type + "Data"} placeholder="Add Secondary Filter"
                             onBlur={(ev) =>this.checkDuplicateSecondary()} value={this.state.secondaryFilterName} onChange={(e)=>this.setState({secondaryFilterName:e.target.value})}/>
-                            <input class="mt-20" type="file" accept=".jpg,.png,.jpeg" id="secondaryFileSelect" encType="multipart/form-data" name="file" onChange={e => this.UploadDirectSubChild(e)}/>
+                            <input class="mt-20" type="file" accept=".jpg,.png,.jpeg" id="secondaryFileSelect" encType="multipart/form-data" name="file" onChange={e => this.UploadDirectSubSecondaryChild(e)}/>
                         </div>
                         <div id={"SecFilter" + this.state.modelSelectedFilter.Type + "Add"} ></div>
                             <Button variant="btn btn-primary mt-20" size="sm" data-id='DocumentLink' onClick={(e) => this.onAppoveFilterSecondary(this.state.modelSelectedFilter.Type, this.state.modelSelectedFilter.FILTER_TYPE_IMAGE,this.state.modelSelectedFilterOptions.FILTER_NAME)} >Save</Button>
@@ -3044,7 +3126,7 @@ export class FilterManagemnt extends Component {
                                                                     {FilterData.filters.map((Filters, index) =>
                                                                         <ListGroup.Item >
                                                                             {['checkbox'].map(type => (
-                                                                                <div className="col-md-12" key={Filters.FILTER_ID} data-id={Filters.FILTER_NAME} onClick={(e)=>this.OpenSecondaryMenuPanel(Filters.FILTER_ID,indexRoot,e)}>
+                                                                                <div className="col-md-12 addSecondary" key={Filters.FILTER_ID} data-id={Filters.FILTER_NAME} onClick={(e)=>this.OpenSecondaryMenuPanel(Filters.FILTER_ID,indexRoot,e)} style={{cursor: 'pointer'}}>
                                                                                     {Filters.FILTER_NAME}
 
                                                                                 </div>

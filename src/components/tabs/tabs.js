@@ -129,7 +129,11 @@ export class TabsPanel extends Component {
                     // console.log(global.Details.SALES_PLAY);
                     if (global.Details.SALES_PLAY.length > 0) {
                         for (var s = 0; s <= global.Details.SALES_PLAY.length - 1; s++) {
-                            salesPlay += global.Details.SALES_PLAY[s].FILTER_NAME + "<br/>";
+                            salesPlay += global.Details.SALES_PLAY[s].FILTER_NAME;
+                            if(global.Details.SALES_PLAY[s].SEC_FILTER_NAME!=undefined && global.Details.SALES_PLAY[s].SEC_FILTER_NAME!=null){
+                                salesPlay += " - "+global.Details.SALES_PLAY[s].SEC_FILTER_NAME; 
+                            }
+                            salesPlay+="<br/>";
                         }
                         this.setState({
                             setSalesPlay: salesPlay
@@ -150,7 +154,11 @@ export class TabsPanel extends Component {
                 if (global.Details.hasOwnProperty(prop)) {
                     if (global.Details.SOLUTION_AREAS.length > 0) {
                         for (var s = 0; s <= global.Details.SOLUTION_AREAS.length - 1; s++) {
-                            solArea += global.Details.SOLUTION_AREAS[s].FILTER_NAME + "<br/>";
+                            solArea += global.Details.SOLUTION_AREAS[s].FILTER_NAME;
+                            if(global.Details.SOLUTION_AREAS[s].SEC_FILTER_NAME != undefined && global.Details.SOLUTION_AREAS[s].SEC_FILTER_NAME != null){
+                                solArea+=" - "+global.Details.SOLUTION_AREAS[s].SEC_FILTER_NAME;
+                            }
+                            solArea+="<br/>";
                         }
                         this.setState({
                             setSolutionArea: solArea
@@ -175,7 +183,11 @@ export class TabsPanel extends Component {
                 if (global.Details.hasOwnProperty(prop)) {
                     if (global.Details.INDUSTRY.length > 0) {
                         for (var s = 0; s <= global.Details.INDUSTRY.length - 1; s++) {
-                            indus += global.Details.INDUSTRY[s].FILTER_NAME + "<br/>";
+                            indus += global.Details.INDUSTRY[s].FILTER_NAME;
+                            if(global.Details.INDUSTRY[s].SEC_FILTER_NAME !=undefined && global.Details.INDUSTRY[s].SEC_FILTER_NAME != null){
+                                indus +=" - "+ global.Details.INDUSTRY[s].SEC_FILTER_NAME;
+                            }
+                            indus+="<br/>";
                         }
                         this.setState({
                             setIndustry: indus
@@ -198,7 +210,11 @@ export class TabsPanel extends Component {
                 if (global.Details.hasOwnProperty(prop)) {
                     if (global.Details.GROUP_TYPE.length > 0) {
                         for (var s = 0; s <= global.Details.GROUP_TYPE.length - 1; s++) {
-                            aType += global.Details.GROUP_TYPE[s].FILTER_NAME + "<br/>";
+                            aType += global.Details.GROUP_TYPE[s].FILTER_NAME;
+                            if(global.Details.GROUP_TYPE[s].SEC_FILTER_NAME !=undefined && global.Details.GROUP_TYPE[s].SEC_FILTER_NAME !=null){
+                                aType += " - "+global.Details.GROUP_TYPE[s].SEC_FILTER_NAME;
+                            }
+                            aType +="<br/>";
                         }
                         this.setState({
                             setAssetType: aType
@@ -730,7 +746,11 @@ export class TabsPanel extends Component {
                     if (global.Details.hasOwnProperty(prop)) {
                         if (global.Details.SOLUTION_AREAS.length > 0) {
                             for (var s = 0; s <= global.Details.SOLUTION_AREAS.length - 1; s++) {
-                                solArea += global.Details.SOLUTION_AREAS[s].FILTER_NAME + "<br/>";
+                                solArea += global.Details.SOLUTION_AREAS[s].FILTER_NAME;
+                                if(global.Details.SOLUTION_AREAS[s].SEC_FILTER_NAME!= undefined && global.Details.SOLUTION_AREAS[s].SEC_FILTER_NAME!=null){
+                                    solArea += " - "+global.Details.SOLUTION_AREAS[s].SEC_FILTER_NAME;
+                                }
+                                solArea +="<br/>";
                             }
                             this.setState({
                                 setSolutionArea: solArea
@@ -756,6 +776,10 @@ export class TabsPanel extends Component {
                         if (global.Details.INDUSTRY.length > 0) {
                             for (var s = 0; s <= global.Details.INDUSTRY.length - 1; s++) {
                                 indus += global.Details.INDUSTRY[s].FILTER_NAME + "<br/>";
+                                if(global.Details.INDUSTRY[s].SEC_FILTER_NAME !=undefined && global.Details.INDUSTRY[s].SEC_FILTER_NAME !=null){
+                                    indus +=" - "+ global.Details.INDUSTRY[s].SEC_FILTER_NAME;
+                                }
+                                indus+="<br/>";
                             }
                             this.setState({
                                 setIndustry: indus
@@ -777,7 +801,11 @@ export class TabsPanel extends Component {
                     if (global.Details.hasOwnProperty(prop)) {
                         if (global.Details.GROUP_TYPE.length > 0) {
                             for (var s = 0; s <= global.Details.GROUP_TYPE.length - 1; s++) {
-                                aType += global.Details.GROUP_TYPE[s].FILTER_NAME + "<br/>";
+                                aType += global.Details.GROUP_TYPE[s].FILTER_NAME;
+                                if(global.Details.GROUP_TYPE[s].SEC_FILTER_NAME != undefined && global.Details.GROUP_TYPE[s].SEC_FILTER_NAME != null){
+                                    aType += " - "+global.Details.GROUP_TYPE[s].SEC_FILTER_NAME;
+                                }
+                                aType +="<br/>";
                             }
                             this.setState({
                                 setAssetType: aType

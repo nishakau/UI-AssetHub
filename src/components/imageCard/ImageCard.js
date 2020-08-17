@@ -312,7 +312,7 @@ export class ImageCard extends Component {
 
 
                 <div id="dataWinShow" class="dataWindow homepage col-md-12">
-                    <Tabs defaultActiveKey="Wins" id="uncontrolled-tab-example" className="mb-4">
+                    <Tabs defaultActiveKey="SolutionAssets" id="uncontrolled-tab-example" className="mb-4">
 
                         <Tab eventKey="Wins" title="Wins">
                             {WinCnt != 0 ? (
