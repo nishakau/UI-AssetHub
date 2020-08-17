@@ -80,7 +80,7 @@ class AssetDetails extends Component {
 
                                         </Col>
                                         <h5 className="col-md-12 mt10 mb10">User Guide</h5>
-                                        <Col md={10}>{HelpData.USER_GUIDE}, Please click <a target="_blank" href={HelpData.USER_GUIDE_URL}>here</a></Col>
+                                        <Col md={10}>{HelpData.USER_GUIDE}, Please click <a href="#" onClick={()=>alert("coming soon")}>here</a></Col>
                                         <hr />
                                         <h5 className="col-md-12 mb20">SUPPORT</h5>
                                         <Col md={10}>For Further queries reach out to us &nbsp;<a href="https://sales-tech-div.slack.com/archives/G01551Z4VSB" target="_blank"><button class="btn-bord btn-xs ">Connect us on Slack</button></a></Col>
