@@ -352,7 +352,6 @@ class Headerr extends Component {
 }
 
 const mapStateToProps = (state) =>{
-  console.log(state);
   return state;
 }
 
