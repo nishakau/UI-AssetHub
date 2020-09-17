@@ -12,9 +12,11 @@
     "react-dom": "^16.8.3",
     "react-markdown": "^4.3.1",
     "react-moment": "^0.8.4",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
     "react-simplemde-editor": "^4.1.1",
+    "redux": "^4.0.5",
     "showdown": "^1.9.1"
   },
   "scripts": {

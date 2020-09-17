@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 import Carousel from 'react-bootstrap/Carousel';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,8 +8,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Profile from "./profileDropdown";
 import axios from 'axios';
+
+import {userRoleChange} from '../actions';
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
-export class Header extends Component {
+class Headerr extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +23,10 @@ export class Header extends Component {
       WinsCount: '',
       statusTab: ''
     };
+
+    sessionStorage.setItem('LOB', this.props.loginReducer.lob);
+    sessionStorage.setItem('role', this.props.loginReducer.role);
+    sessionStorage.setItem('leader', this.props.loginReducer.leader);
   }
 
 
@@ -90,6 +97,7 @@ export class Header extends Component {
       window.open(url, "_blank");
   }
   render() {
+
     //  console.log(this.state.statusTab);
     global.redirectUrl = window.location.href;
     if (global.selectedCategory == undefined) {
@@ -343,4 +351,9 @@ export class Header extends Component {
   }
 }
 
-export default Header
+const mapStateToProps = (state) =>{
+  console.log(state);
+  return state;
+}
+
+export const Header = connect(mapStateToProps,{userRoleChange})(Headerr);
