@@ -23,10 +23,11 @@ class Headerr extends Component {
       WinsCount: '',
       statusTab: ''
     };
-
+    if(this.props.loginReducer.lob != undefined && this.props.loginReducer.role != undefined && this.props.loginReducer.leader != undefined){
     sessionStorage.setItem('LOB', this.props.loginReducer.lob);
     sessionStorage.setItem('role', this.props.loginReducer.role);
     sessionStorage.setItem('leader', this.props.loginReducer.leader);
+    }
   }
 
 
