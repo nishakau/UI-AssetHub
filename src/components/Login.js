@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+
+import {userRoleChange} from '../actions';
+
 import {
     Redirect
 } from "react-router-dom";
 import axios from 'axios';
-export class Footer extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,6 +40,7 @@ export class Footer extends Component {
                         // alert('NOt registred');
                         //  document.getElementById("myModalnew").style.display = 'block'; 
                     } else {
+                        let userRoleAccess={};
                         global.loginStatus = res.data.exist;
                         sessionStorage.setItem("role", res.data.role);
                         sessionStorage.setItem("location", res.data.location);
@@ -46,11 +51,19 @@ export class Footer extends Component {
 
                         if (res.data.lob == null) {
                             sessionStorage.setItem("LOB", "Others");
+                            userRoleAccess.lob ="Others";
 
                         } else {
                             sessionStorage.setItem("LOB", res.data.lob);
+                            userRoleAccess.lob =res.data.lob;
                         }
 
+                        userRoleAccess.role =res.data.role;
+                        userRoleAccess.location = res.data.location;
+                        userRoleAccess.pillar = res.data.pillar;
+                        userRoleAccess.phone = res.data.phone;
+                        userRoleAccess.leader = res.data.leader;
+                        this.props.userRoleChange(userRoleAccess);
                         // global.role=res.data.role;
                         // global.location=res.data.location;
                         // global.pillar=res.data.pillar;
@@ -101,6 +114,7 @@ export class Footer extends Component {
                                         // alert('NOt registred');
                                         //  document.getElementById("myModalnew").style.display = 'block'; 
                                     } else {
+                                        let userRoleAccess ={};
                                         global.loginStatus = res.data.exist;
                                         sessionStorage.setItem("role", res.data.role);
                                         sessionStorage.setItem("location", res.data.location);
@@ -109,8 +123,10 @@ export class Footer extends Component {
                                         sessionStorage.setItem("leader", res.data.leader);
                                         if (res.data.lob == null) {
                                             sessionStorage.setItem("LOB", "Others");
+                                            userRoleAccess.lob = "Others";
                                         } else {
                                             sessionStorage.setItem("LOB", res.data.lob);
+                                            userRoleAccess.lob =res.data.lob;
                                         }
                                         // global.role=res.data.role;
                                         // global.location=res.data.location;
@@ -118,6 +134,13 @@ export class Footer extends Component {
                                         this.setState({
                                             LoginSuccess: true
                                         });
+                                        userRoleAccess.role =res.data.role;
+                                        userRoleAccess.location = res.data.location;
+                                        userRoleAccess.pillar = res.data.pillar;
+                                        userRoleAccess.phone = res.data.phone;
+                                        userRoleAccess.leader = res.data.leader;
+                                        this.props.userRoleChange(userRoleAccess);
+                                       
                                     }
                                 }).catch(error => {
                                     // alert(error+", Sorry for the delayed response");
@@ -174,4 +197,10 @@ export class Footer extends Component {
     }
 }
 
-export default Footer
+const mapStateToProps = (state) =>{
+    return state;
+
+};
+
+
+export default connect(mapStateToProps,{userRoleChange})(Footer);
