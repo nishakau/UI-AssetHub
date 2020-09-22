@@ -166,6 +166,7 @@ class Headerr extends Component {
             {/* {sessionStorage.getItem('role').indexOf('admin') !=-1 && <Link to="/MyWinStories" className={global.statusTab == 'MyWinStories' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('MyWinStories')} >My Wins</Link>} */}
             {sessionStorage.getItem('role').indexOf('reviewer') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance</Link>}
             {sessionStorage.getItem('role').indexOf('admin') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance</Link>}
+            {sessionStorage.getItem('role').indexOf('manager') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance Manager</Link>}
             {sessionStorage.getItem('leader') == "true" && <Link to="/Reports" className={global.statusTab == 'Reports' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Reports')} >Reports</Link>}
             <Link to="/helpSupport" className={global.statusTab == 'helpSupport' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('helpSupport')} >Help & Support</Link>
 

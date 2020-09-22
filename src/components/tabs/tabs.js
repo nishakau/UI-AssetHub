@@ -13,6 +13,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ReactMarkdown from  'react-markdown';
 
+import {connect} from 'react-redux';
+
 
 import {
     BrowserRouter as Router,
@@ -415,6 +417,8 @@ export class TabsPanel extends Component {
 
     }
     ApproveAsset = (val) => {
+
+      
         //     alert('test'+val);
         //  alert(this.state.ReviewNoteOverviewVal);
         //  var url = window.location.href;
@@ -454,9 +458,14 @@ export class TabsPanel extends Component {
             objJson.push(data);
         }
         if (this.state.ReviewNoteOverviewVal != "" || this.state.ReviewNoteArchitechureVal != "" || this.state.ReviewNoteCollateralVal != "") {
+            let status = "Live";
+            // if(this.props.user_role != undefined && this.props.user_role == 'manager'){
+            //     status ="manager_approved"
+            // }
+
             var reqParm = {
                 "review_note": objJson, "assetId": global.ID,
-                "asset_status": "Live",
+                "asset_status": status,
                 "user_email": sessionStorage.getItem("user_email")
 
 
@@ -1821,5 +1830,9 @@ export class TabsPanel extends Component {
         )
     }
 }
+const mapStateToProps = (state)=>{
+    console.log(state);
+    return {user_email:state.loginReducer.user_email,user_role:state.loginReducer.role};
+}
 
-export default TabsPanel
+export default connect(mapStateToProps)(TabsPanel);

@@ -63,6 +63,7 @@ class Footer extends Component {
                         userRoleAccess.pillar = res.data.pillar;
                         userRoleAccess.phone = res.data.phone;
                         userRoleAccess.leader = res.data.leader;
+                        userRoleAccess.user_email = sessionStorage.getItem("user_email");
                         this.props.userRoleChange(userRoleAccess);
                         // global.role=res.data.role;
                         // global.location=res.data.location;
@@ -139,6 +140,7 @@ class Footer extends Component {
                                         userRoleAccess.pillar = res.data.pillar;
                                         userRoleAccess.phone = res.data.phone;
                                         userRoleAccess.leader = res.data.leader;
+                                        userRoleAccess.user_email = global.email;
                                         this.props.userRoleChange(userRoleAccess);
                                        
                                     }

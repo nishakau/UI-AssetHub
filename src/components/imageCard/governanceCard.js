@@ -18,7 +18,7 @@ import {
 } from "react-router-dom";
 export class ImageCard extends Component {
     state = {
-        AssetDataLive: [],AssetUnderReview: [],PendingRectification:[],AssetRejected: [],AssetLive:[],
+        AssetDataLive: [],AssetUnderReview: [],PendingRectification:[],AssetRejected: [],AssetLive:[],AssetManagerApproved:[],
 
         redirectPage:'', AssetID:'', redirectEditPage:'',classDeploy:'',redirectDeployPage:'',redirectDetailPage:''
       }
@@ -34,6 +34,17 @@ export class ImageCard extends Component {
             for(var i=0;i<res.data.length;i++){
                 // console.log((res.data[i].status));
              
+                if(res.data[i].status=="manager_approved"){
+                  for(var j=0;j<res.data[i].list.length;j++){
+                    if(res.data[i].list[j].ASSET_REVIEW_NOTE==null){
+                        res.data[i].list[j].ASSET_REVIEW_NOTE=[];
+                   }
+                  }
+                    const AssetManagerApproved = res.data[i].list;
+
+                    this.setState({ AssetManagerApproved });
+
+                }
                 if(res.data[i].status=="Pending Review"){
                   //  global.AssetCount=AssetData;
                   for(var j=0;j<res.data[i].list.length;j++){
@@ -220,11 +231,14 @@ export class ImageCard extends Component {
     var PendingRectificationnew;
     var AssetRejectednew;
     var AssetLivenew;
+    var AssetManagerApproved;
 
     AssetUnderReviewnew=this.state.AssetUnderReview;
     PendingRectificationnew=this.state.PendingRectification;
     AssetRejectednew=this.state.AssetRejected;
     AssetLivenew=this.state.AssetLive;
+    AssetManagerApproved = this.state.AssetManagerApproved;
+
 
     var UnderReviewCnt;
     if(AssetUnderReviewnew.length>0){
@@ -533,6 +547,77 @@ export class ImageCard extends Component {
                                             </>
                                             
                                             {/* <td class="review_tab" onClick={this.handleDetails(AssetRejected.ASSET_ID)}>VIEW</td> */}
+
+                                            
+
+                                          </tr>
+                                         
+                                        </tbody>
+                                        // <Col md={12} data-id={AssetUnderReview.ASSET_ID} className="mb-4 itemCard">
+                                        //     <div class="clearfix bord-1"><Image src={AssetUnderReview.ASSET_THUMBNAIL} rounded  />
+                                        //         <h5>{AssetUnderReview.ASSET_TITLE}</h5>
+                                        //         <p>{AssetUnderReview.ASSET_DESCRIPTION}</p>
+                                        //         <span class="status underReview">&#9679; {AssetUnderReview.ASSET_STATUS}</span>
+                                        //         <div className="small mt-20"><Moment format="DD MMMM YYYY">{AssetUnderReview.ASSET_CREATED_DATE}</Moment></div>
+                                        //     </div>
+                                            
+                                        // </Col>
+                                    )}
+                                  
+                                    
+                                    </table>  </>}{PendingRectificationnew.length<=0 && <p class="text-center">
+                                        No Records Yet.
+                                    </p>}
+
+                               </Tab>  
+
+                               <Tab eventKey="LeaderReviewPending" title="Submitted for Leader Approval">
+                                {AssetManagerApproved.length>0 && <>
+                                <table class="table table-bordered governance">
+                                <thead>
+                                          <tr>
+                                            <th></th>
+                                            <th>Title</th>
+                                            <th>Asset ID</th>
+                                            {/* <th style={{width:100}}>Scrm ID</th> */}
+                                            <th>Asset CreatedBy</th>
+                                            <th>Asset Owner</th>
+                                            {/* <th>Asset Description</th> */}
+                                            <th>Action</th>
+
+                                          </tr>
+                                        </thead>
+                               
+
+                                    {AssetManagerApproved.map((AssetMgrAppr,index)=> 
+                                        
+                                        
+                                        <tbody>
+                                          <tr>
+                                            <td class=""><Image src={AssetMgrAppr.ASSET_THUMBNAIL}   /></td>
+                                            <td>{AssetMgrAppr.ASSET_TITLE}</td>
+                                            <td>{AssetMgrAppr.ASSET_ID}</td>
+                                            {/* <td>{AssetMgrAppr.ASSET_SCRM_ID}</td> */}
+                                            <td>{AssetMgrAppr.ASSET_CREATEDBY}</td>
+                                            <td>  {AssetMgrAppr.ASSET_OWNER.split('\n').map((item, key) => {
+                                                      return <span key={key}>{item}<br/></span>
+                                                })}
+                                            </td>
+                                            {/* <td>{AssetMgrAppr.ASSET_OWNER}</td> */}
+                                            {/* <td><ReactMarkdown source={AssetMgrAppr.ASSET_DESCRIPTION} /></td> */}
+                                            <>
+                                            <td className="Notes hide" id={"NotesVal"+AssetMgrAppr.ASSET_ID}> {AssetMgrAppr.ASSET_REVIEW_NOTE.map(ASSET_REVIEW_NOTE => 
+                                            <>
+                                            {/* {ASSET_REVIEW_NOTE.length} */}
+                                            {ASSET_REVIEW_NOTE.note +'Title' + ASSET_REVIEW_NOTE.section+'next'}
+                                            </>
+                                            )}
+                                            </td>
+                                            
+                                            <td class="review_tab"  onClick={this.handleViewNote(AssetMgrAppr.ASSET_ID)}>VIEW</td>
+                                            </>
+                                            
+                                            {/* <td class="review_tab" onClick={this.handleDetails(AssetMgrAppr.ASSET_ID)}>VIEW</td> */}
 
                                             
 
