@@ -159,7 +159,7 @@ class Headerr extends Component {
           <Nav className="ml-auto">
            <input type="text" id="header-container" />
             <Link to="/home" className={global.statusTab == '' || global.statusTab == undefined ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('')} >HOME</Link>
-            <Link to="/MyAssets" className={global.statusTab == 'MYAssets' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('MYAssets')} >My ASSETS</Link>
+            {sessionStorage.getItem('role').indexOf('vp') ==-1  &&<Link to="/MyAssets" className={global.statusTab == 'MYAssets' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('MYAssets')} >My ASSETS</Link>}
             {/* <Link to ="/Governance"  className={global.statusTab=='Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance</Link> */}
             {/* <Link to ="/MyWinStories"  className={global.statusTab=='MyWinStories' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('MyWinStories')} >My Wins</Link> */}
             {sessionStorage.getItem('role').indexOf('winloader') !=-1 && <Link to="/MyWinStories" className={global.statusTab == 'MyWinStories' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('MyWinStories')} >My Wins</Link>}
@@ -167,6 +167,7 @@ class Headerr extends Component {
             {sessionStorage.getItem('role').indexOf('reviewer') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance</Link>}
             {sessionStorage.getItem('role').indexOf('admin') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance</Link>}
             {sessionStorage.getItem('role').indexOf('manager') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance Manager</Link>}
+            {sessionStorage.getItem('role').indexOf('vp') !=-1  && <Link to="/Governance" className={global.statusTab == 'Governance' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Governance')} >Governance Leader</Link>}
             {sessionStorage.getItem('leader') == "true" && <Link to="/Reports" className={global.statusTab == 'Reports' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('Reports')} >Reports</Link>}
             <Link to="/helpSupport" className={global.statusTab == 'helpSupport' ? "nav-link active" : "nav-link"} onClick={() => this.handleTab('helpSupport')} >Help & Support</Link>
 

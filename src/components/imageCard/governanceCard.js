@@ -9,6 +9,8 @@ import Tab from 'react-bootstrap/Tab';
 import axios from 'axios';
 import ReactMarkdown from  'react-markdown';
 
+import {connect} from 'react-redux';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -233,13 +235,23 @@ export class ImageCard extends Component {
     var AssetLivenew;
     var AssetManagerApproved;
 
-    AssetUnderReviewnew=this.state.AssetUnderReview;
+    if(this.props.user_role =='vp'){
+      AssetUnderReviewnew =this.state.AssetManagerApproved;
+    }else{
+      AssetUnderReviewnew=this.state.AssetUnderReview;
+    }
     PendingRectificationnew=this.state.PendingRectification;
     AssetRejectednew=this.state.AssetRejected;
     AssetLivenew=this.state.AssetLive;
     AssetManagerApproved = this.state.AssetManagerApproved;
 
 
+    var LeaderApprovalCnt
+    if(AssetManagerApproved.length>0){
+      LeaderApprovalCnt = "Submitted for Leader's Approval ("+AssetManagerApproved.length+")";
+    }else{
+      LeaderApprovalCnt = "Submitted for Leader's Approval";
+    }
     var UnderReviewCnt;
     if(AssetUnderReviewnew.length>0){
         UnderReviewCnt="Pending Review ("+AssetUnderReviewnew.length+")";
@@ -570,8 +582,8 @@ export class ImageCard extends Component {
                                     </p>}
 
                                </Tab>  
-
-                               <Tab eventKey="LeaderReviewPending" title="Submitted for Leader Approval">
+                              {this.props.user_role !='vp' &&
+                               <Tab eventKey="LeaderReviewPending" title={LeaderApprovalCnt}>
                                 {AssetManagerApproved.length>0 && <>
                                 <table class="table table-bordered governance">
                                 <thead>
@@ -640,7 +652,7 @@ export class ImageCard extends Component {
                                         No Records Yet.
                                     </p>}
 
-                               </Tab>  
+                                            </Tab>  }
                                                           
                               
                         </Tabs>
@@ -651,4 +663,10 @@ export class ImageCard extends Component {
   }
 }
 
-export default ImageCard
+
+const mapStateToProps = (state) =>{
+  return {user_role:state.loginReducer.role};
+
+};
+
+export default connect(mapStateToProps)(ImageCard)

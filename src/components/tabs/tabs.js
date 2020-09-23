@@ -458,10 +458,11 @@ export class TabsPanel extends Component {
             objJson.push(data);
         }
         if (this.state.ReviewNoteOverviewVal != "" || this.state.ReviewNoteArchitechureVal != "" || this.state.ReviewNoteCollateralVal != "") {
-            let status = "Live";
-            // if(this.props.user_role != undefined && this.props.user_role == 'manager'){
-            //     status ="manager_approved"
-            // }
+            
+            let status = "manager_approved";
+            if(this.props.user_role != undefined && this.props.user_role == 'vp'){
+                status ="Live"
+            }
 
             var reqParm = {
                 "review_note": objJson, "assetId": global.ID,
@@ -470,6 +471,7 @@ export class TabsPanel extends Component {
 
 
             };
+            
             axios.post(global.Ip + global.Port + '/governance/postreviewnote', reqParm, {
                 headers: {
                     "user_email": sessionStorage.getItem("user_email")

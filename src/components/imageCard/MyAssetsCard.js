@@ -18,7 +18,7 @@ import {
 } from "react-router-dom";
 export class ImageCard extends Component {
     state = {
-        AssetDataLive: [],AssetUnderReview: [],PendingRectification:[],AssetRejected: [],
+        AssetDataLive: [],AssetUnderReview: [],PendingRectification:[],AssetRejected: [],AssetManagerApproved:[],
 
         redirectPage:'', AssetID:'', redirectEditPage:'',classDeploy:'',redirectDeployPage:'',handleViewNote:''
       }
@@ -62,6 +62,18 @@ export class ImageCard extends Component {
                         this.setState({ AssetUnderReview });
 
                     }
+                    if(res.data[i].status=="manager_approved"){
+                        for(var j=0;j<res.data[i].arr.length;j++){
+                            if(res.data[i].arr[j].ASSET_REVIEW_NOTE==null){
+                                res.data[i].arr[j].ASSET_REVIEW_NOTE=[];
+                           }
+                          }
+                        const AssetManagerApproved = res.data[i].arr;
+                        //console.log(AssetUnderReview);
+                      //  global.AssetCount=AssetData;
+                        this.setState({ AssetManagerApproved });
+                    }
+
                     if(res.data[i].status=="Pending Rectification"){
                         for(var j=0;j<res.data[i].arr.length;j++){
                             if(res.data[i].arr[j].ASSET_REVIEW_NOTE==null){
@@ -177,7 +189,7 @@ export class ImageCard extends Component {
     //     AssetDatanew=global.assetData;  
     //   }else{
         AssetDataLivenew=this.state.AssetDataLive;
-        AssetUnderReviewnew=this.state.AssetUnderReview;
+        AssetUnderReviewnew=this.state.AssetUnderReview.concat(this.state.AssetManagerApproved);
         PendingRectificationnew=this.state.PendingRectification;
         AssetRejectednew=this.state.AssetRejected;
         var LiveCnt="";
@@ -359,4 +371,5 @@ export class ImageCard extends Component {
   }
 }
 
-export default ImageCard
+
+export default ImageCard;
