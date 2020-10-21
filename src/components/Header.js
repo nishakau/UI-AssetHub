@@ -286,29 +286,29 @@ class Headerr extends Component {
                   </div>*/}
                   <div style={{ width: "85%", display: "flex", marginBottom: "25px", marginTop: "25px" }}>
                     <div style={{ display: "flex", marginBottom: "10px" }}>
-                      <div className="bannerCard">
+                      <div className="bannerCard" onClick={()=>window.alert('This page is currently in WIP phase')}>
                         <img src="../img/Top_consuming_customers.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Top Consuming Customers</span>
                       </div>
-                      <div className="bannerCard">
+                      <div className="bannerCard" onClick={()=>window.alert('This page is currently in WIP phase')}>
                         <img src="../img/Top_consuming_customers.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Top Booking Customers</span>
                       </div>
-                      <div className="bannerCard">
+                      <div className="bannerCard" onClick={()=>window.alert('This page is currently in WIP phase')}>
                         <img src="../img/Win_Slides.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>NATech Consulting Wins & Go-Lives</span>
                       </div>
-                      <div className="bannerCard">
+                      <div className="bannerCard" onClick={()=>window.alert('This page is currently in WIP phase')}>
                         <img src="../img/Win_Slides.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Customer Ready Slides</span>
                       </div>
                       <br/>
 
-                      <div className="bannerCard">
+                      <div className="bannerCard" onClick={()=>window.alert('This page is currently in WIP phase')}>
                         <img src="../img/ReferenceAssets.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Reference Assets</span>
                       </div>
-                      <div className="bannerCard">
+                      <div className="bannerCard" onClick={()=>window.alert('This page is currently in WIP phase')}>
                         <img src="../img/ResourceAssets.png" alt="qrcoe" className="bannerstoryIconSmall" />
                         <span style={{ color: "#000", lineHeight: "1.2" }}>Resource Assets</span>
                       </div>
