@@ -524,9 +524,13 @@ export class TabsPanel extends Component {
             objJson.push(data);
         }
         if (this.state.ReviewNoteOverviewVal != "" || this.state.ReviewNoteArchitechureVal != "" || this.state.ReviewNoteCollateralVal != "") {
+            let status = "Manager Rectification";
+            if(this.props.user_role != undefined && this.props.user_role == 'vp'){
+                status ="Pending Rectification"
+            }
             var reqParm = {
                 "review_note": objJson, "assetId": global.ID,
-                "asset_status": "Pending Rectification",
+                "asset_status": status,
                 "user_email": sessionStorage.getItem("user_email")
 
             };
@@ -1385,8 +1389,8 @@ export class TabsPanel extends Component {
                     <Col>
                         <div class={this.state.class}>
                             <ButtonGroup aria-label="Basic example ">
-                                {this.state.Details.ASSET_STATUS != "Live" && <Button variant="outline-warning" size="sm" onClick={e => this.ApproveAsset(e)}>Approve</Button>}
-                                {this.state.Details.ASSET_STATUS != "Pending Rectification" && <Button variant="outline-warning" size="sm" onClick={e => this.RectifyAsset(e)}> Send for Rectification</Button>}
+                                {(this.state.Details.ASSET_STATUS != "Live" || this.state.Details.ASSET_STATUS != "Pending Rectification" || this.state.Details.ASSET_STATUS != "Manager Rectification") && <Button variant="outline-warning" size="sm" onClick={e => this.ApproveAsset(e)}>Approve</Button>}
+                                {(this.state.Details.ASSET_STATUS != "Pending Rectification" || this.state.Details.ASSET_STATUS != "Manager Rectification")  && <Button variant="outline-warning" size="sm" onClick={e => this.RectifyAsset(e)}> Send for Rectification</Button>}
                                 <Button variant="outline-warning" size="sm" onClick={e => this.RejectAsset(e)}>Reject</Button>
                             </ButtonGroup>
                         </div>
