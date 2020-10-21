@@ -331,45 +331,7 @@ export class FilterImageCard extends Component {
             
            {/* </> ):(
               <> */}
-              <>
-              <h5 class="col-md-12 mt-20 sectionCover">Wins ( {WinCnt} ) <span class="ml-20"><UNSELECTWin /></span></h5>
               
-              <hr/>
-              {WinCnt != 0 ? (  
-              <div id="dataWinShowUnMap" class="dataWindow col-md-12">
-                      <div className="Scroll" >
-
-              
-                {WinDatanew.map((winData,index)=> 
-                 <Col md={4} data-id={winData.WINSTORY_ID}  id={winData.WINSTORY_ID} className="mb-4 filterCard cards" >
-                    {/* {winData.PROMOTE==true &&
-                    <div class="promoted" >Promoted</div>} */}
-                    <div class="dfd">
-                     {/* <Image src={winData.WINSTORY_LOGO} className="roundedCard"  /> */}
-                     {/* <div class="viewEdit text-center home">
-                              <a href="javascript:void(0);"  onClick={this.handleViewWin(winData.WINSTORY_ID)} class="view"> View </a>
-                     </div> */}
-                     <div className="cardInfor maptitle">
-                     <label class="">
-                        <input type="checkbox" checked="checked" onClick={filterBoxWin} id={winData.WINSTORY_ID + "Panel"} name="filterDataUnMapWin"/>
-                        <span class="checkmark"></span>
-                    </label> 
-                    <div className="cardTitle" title= {winData.WINSTORY_NAME}>&nbsp;
-                         
-                             {winData.WINSTORY_NAME}
-                             <div className="small">{winData.WINSTORY_ID}</div>
-                         </div>
-                        
-                     </div>
-                     </div>
-                     {/* </div> */}
-                 </Col>
-              )}
-              </div>
-             </div>):(<Row className="errorMSG">
-                  <Col md={12} className="mb-12 pd40 text-center"> <strong >{norecordMsg}</strong></Col>
-              </Row>)}
-              </>
             {/* </>  */}
           {/* // )} */}
              
