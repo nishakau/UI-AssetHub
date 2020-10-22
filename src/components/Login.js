@@ -18,14 +18,17 @@ class Footer extends Component {
     }
     componentDidMount() {
         // alert(global.loginStatus);
-        if ((sessionStorage.getItem("user_email") != undefined) && (sessionStorage.getItem("user_email") != null) && (sessionStorage.getItem("user_email") != "")) {
+        // if ((sessionStorage.getItem("user_email") != undefined) && (sessionStorage.getItem("user_email") != null) && (sessionStorage.getItem("user_email") != "")) {
+        if(this.props.state != undefined){
+        if ((this.props.state.user_email != undefined) && (this.props.state.user_email != null) && (this.props.state.user_email != "")) {
+            
             var reqParms = {
-                "email": sessionStorage.getItem('user_email'),
-                "user_email": sessionStorage.getItem("user_email")
+                "email": this.props.state.user_email,
+                "user_email": this.props.state.user_email
             }
             axios.post(global.Ip + global.Port + '/user/findbyemail/', reqParms, {
                 headers: {
-                    "user_email": sessionStorage.getItem("user_email")
+                    "user_email": this.props.state.user_email
 
                 }
             })
@@ -63,7 +66,8 @@ class Footer extends Component {
                         userRoleAccess.pillar = res.data.pillar;
                         userRoleAccess.phone = res.data.phone;
                         userRoleAccess.leader = res.data.leader;
-                        userRoleAccess.user_email = sessionStorage.getItem("user_email");
+                       // userRoleAccess.user_email = sessionStorage.getItem("user_email");
+                        userRoleAccess.user_email = this.props.state.user_email;
                         this.props.userRoleChange(userRoleAccess);
                         // global.role=res.data.role;
                         // global.location=res.data.location;
@@ -82,7 +86,7 @@ class Footer extends Component {
                 });
 
 
-        } else {
+        }} else {
             axios.get(global.baseDom + '/ssoheader.php')
                 .then(res => {
                     if (res.data.indexOf('<!DOCTYPE html>') == -1) {
