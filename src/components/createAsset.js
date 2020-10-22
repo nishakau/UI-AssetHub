@@ -14,6 +14,7 @@ import Footer from './Footer/Footer';
 import Button from 'react-bootstrap/Button'
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import {connect} from 'react-redux';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import {
@@ -1059,6 +1060,7 @@ class AssetDetails extends Component {
             "location": sessionStorage.getItem("location"),
             "asset_architecture_description": this.state.Notional_Architechure_Notes,
             "user_email": sessionStorage.getItem("user_email"),
+            "user_role": this.props.user_role
             //"assettype": this.state.AssetFormSelection
 
         }
@@ -1669,4 +1671,9 @@ class AssetDetails extends Component {
         );
     }
 }
-export default AssetDetails;
+
+const mapStateToProps = (state) =>{
+    return {user_role:state.loginReducer.role};
+  
+  };
+export default connect(mapStateToProps)(AssetDetails);
