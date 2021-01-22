@@ -460,7 +460,7 @@ export class TabsPanel extends Component {
         if (this.state.ReviewNoteOverviewVal != "" || this.state.ReviewNoteArchitechureVal != "" || this.state.ReviewNoteCollateralVal != "") {
             
             let status = "manager_approved";
-            if(this.props.user_role != undefined && this.props.user_role == 'vp'){
+            if((this.props.user_role != undefined) && (this.props.user_role == 'vp'||this.props.user_role == 'admin')){
                 status ="Live"
             }
 

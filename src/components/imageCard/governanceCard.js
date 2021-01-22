@@ -251,6 +251,8 @@ export class ImageCard extends Component {
 
     if(this.props.user_role =='vp'){
       AssetUnderReviewnew =this.state.AssetManagerApproved;
+    }else if(this.props.user_role =='admin'){
+      AssetUnderReviewnew = [...this.state.AssetManagerApproved,...this.state.AssetUnderReview];
     }else{
       AssetUnderReviewnew=this.state.AssetUnderReview;
     }
@@ -602,7 +604,7 @@ export class ImageCard extends Component {
                                     </p>}
 
                                </Tab>  
-                              {this.props.user_role !='vp' &&
+                              {(this.props.user_role !='vp' && this.props.user_role !='admin') &&
                                <Tab eventKey="LeaderReviewPending" title={LeaderApprovalCnt}>
                                 {AssetManagerApproved.length>0 && <>
                                 <table class="table table-bordered governance">
